@@ -30,6 +30,19 @@
     .active {
       display: block;
     }
+    /* Blog image styles */
+    .blog-image {
+      max-width: 100%;
+      height: auto;
+      border-radius: 6px;
+      display: block;
+      margin: 12px 0;
+    }
+    .image-caption {
+      font-size: 0.9rem;
+      color: #444;
+      margin-bottom: 12px;
+    }
   </style>
 </head>
 <body>
@@ -52,14 +65,61 @@
 
   <div id="blog" class="tab">
     <h1>Blog</h1>
-    <h2>welcome to my website!</h2>
+    <ul>
+      <li><a onclick="openTab('post-welcome')">welcome to my website!</a></li>
+      <li><a onclick="openTab('post-math-is-beautiful')">math is beautiful</a></li>
+    </ul>
+  </div>
+
+  <div id="post-welcome" class="tab">
+    <h1>welcome to my website!</h1>
     <p>This is my first blog post. More coming soon.</p>
+
+    <!-- Example: local image (place your image in an "images" folder next to index.html) -->
+    <figure>
+      <img class="blog-image" src="images/my-photo.jpg" alt="A descriptive alt text for the local image">
+      <figcaption class="image-caption">Local image example — place your file at <code>images/my-photo.jpg</code></figcaption>
+    </figure>
+
+    <!-- Example: remote image (hosted elsewhere) -->
+    <figure>
+      <img class="blog-image" src="https://via.placeholder.com/800x400" alt="Placeholder remote image example">
+      <figcaption class="image-caption">Remote image example — uses an external URL</figcaption>
+    </figure>
+
+    <p>Notes: use meaningful alt text for accessibility; prefer modern formats (WebP) for performance. If using a local image, create an <code>images/</code> folder and put the file there.</p>
+
+    <p><a onclick="openTab('blog')">← Back to Blog</a></p>
+  </div>
+
+  <div id="post-math-is-beautiful" class="tab">
+    <h1>math is beautiful</h1>
+    <p>One of my favorite visualizations: the Mandelbrot set.</p>
+
+    <!-- Remote public-domain Mandelbrot image from Wikimedia Commons -->
+    <figure>
+      <img class="blog-image" src="https://upload.wikimedia.org/wikipedia/commons/2/21/Mandel_zoom_00_mandelbrot_set.jpg" alt="Mandelbrot set zoomed image">
+      <figcaption class="image-caption">Mandelbrot set (zoom). Image credit: public domain / Wikimedia Commons.</figcaption>
+    </figure>
+
+    <p>If you'd rather use a local copy, save an image into <code>images/mandelbrot.jpg</code> and change the <code>src</code> to <code>images/mandelbrot.jpg</code>. For better performance, consider a WebP file.</p>
+
+    <p>Fun facts: the Mandelbrot set is the set of complex numbers c for which the sequence z_{n+1} = z_n^2 + c (starting at z_0 = 0) does not diverge. Tiny tweaks of parameters reveal intricate, self-similar patterns.</p>
+
+    <p><a onclick="openTab('blog')">← Back to Blog</a></p>
   </div>
 
   <div id="projects" class="tab">
     <h1>Projects</h1>
-    <h2>AstroPhoenix</h2>
+    <ul>
+      <li><a onclick="openTab('project-astro')">AstroPhoenix</a></li>
+    </ul>
+  </div>
+
+  <div id="project-astro" class="tab">
+    <h1>AstroPhoenix</h1>
     <p>A brief description of your project AstroPhoenix.</p>
+    <p><a onclick="openTab('projects')">← Back to Projects</a></p>
   </div>
 
   <script>
