@@ -54,19 +54,23 @@
   </nav>
 
   <div id="home" class="tab active">
-    <h1>Welcome</h1>
-    <p>This is my minimalist website.</p>
+    <h1>Welcome!</h1>
+    <p>This is my personal website.</p>
+    <a href="https://www.linkedin.com/in/evelynhu29/">LinkedIn</a>
+    <a href="https://github.com/TinyDragon612">GitHub</a>
+    <a href="https://www.instagram.com/eviehu612/">Instagram</a>
+    
   </div>
 
   <div id="about" class="tab">
     <h1>About Me</h1>
-    <p>Write something about yourself here.</p>
+    <p>I'm a student at the University of Chicago studying computer science and philosophy.</p>
   </div>
 
   <div id="blog" class="tab">
     <h1>Blog</h1>
     <ul>
-      <li><a onclick="openTab('post-welcome')">welcome to my website!</a></li>
+      <li><a onclick="openTab('post-welcome')">things i'm interested in</a></li>
       <li><a onclick="openTab('post-math-is-beautiful')">math is beautiful</a></li>
     </ul>
   </div>
@@ -94,14 +98,14 @@
 
   <div id="post-math-is-beautiful" class="tab">
     <h1>math is beautiful</h1>
-    <p>One of my favorite visualizations: the Mandelbrot set.</p>
+    <p>Math is beautiful.</p>
 
     <figure>
-      <img class="blog-image" src="images/mandelbrot.png" alt="A zoomed-in view of the Mandelbrot set, showing intricate fractal patterns">
-      <figcaption class="image-caption">Mandelbrot set (zoom).</figcaption>
+      <img class="blog-image" src="images/mandelbrot2.png" alt="A zoomed-in view of the Mandelbrot set, showing intricate fractal patterns" width="200" height="150">
+      <figcaption class="image-caption">Mandelbrot set (zoom 78125x, center at +0.11654447+0.59475002i).</figcaption>
     </figure>
 
-    <p>Fun facts: the Mandelbrot set is the set of complex numbers c for which the sequence z_{n+1} = z_n^2 + c (starting at z_0 = 0) does not diverge. Tiny tweaks of parameters reveal intricate, self-similar patterns.</p>
+    <p>The Mandelbrot set is the set of complex numbers c for which the sequence z_{n+1} = z_n^2 + c (starting at z_0 = 0) does not diverge. Tiny tweaks of parameters reveal intricate, self-similar patterns.</p>
 
     <p><a onclick="openTab('blog')">← Back to Blog</a></p>
   </div>
@@ -115,7 +119,8 @@
 
   <div id="project-astro" class="tab">
     <h1>AstroPhoenix</h1>
-    <p>A brief description of your project AstroPhoenix.</p>
+    <p>This project was created for the 2025 Nasa Space Apps Challenge, my first ever hackathon! This was a lot of fun to make.</p>
+    <p>Explore the platform here: https://awesomecoder412412.github.io/AstrophoenixWeb/</p>
     <p><a onclick="openTab('projects')">← Back to Projects</a></p>
   </div>
 
