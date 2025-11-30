@@ -3,25 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Personal Website</title>
+  <title>Evie Hu's Website</title>
   <style>
     body {
       font-family: "Courier New", monospace;
       margin: 0;
       padding: 0;
-      background: #dddad5;
+      background: #d3d1ce;
       color: #4a4a52;
     }
     nav {
       display: flex;
       gap: 20px;
       padding: 20px;
-      border-bottom: 1px solid #3a3c50;
+      border-bottom: 1px solid #4a4a52;
     }
     nav a {
       cursor: pointer;
       text-decoration: none;
-      color: #3a3c50;
+      color: #4a4a52;
     }
     .tab {
       display: none;
@@ -54,21 +54,24 @@
   </nav>
 
   <div id="home" class="tab active">
-    <h1>Welcome!</h1>
+    <h1>Evelyn Hu</h1>
     <p>This is my personal website.</p>
+    <p>evelynhu@uchicago.edu</p>
     <a href="https://www.linkedin.com/in/evelynhu29/">LinkedIn</a>
     <a href="https://github.com/TinyDragon612">GitHub</a>
     <a href="https://www.instagram.com/eviehu612/">Instagram</a>
+    <p>Hey there! Welcome to my website. As of Autumn 2025, I'm a student at the University of Chicago studying computer science and philosophy.</p>
     
   </div>
 
   <div id="about" class="tab">
     <h1>About Me</h1>
-    <p>I'm a student at the University of Chicago studying computer science and philosophy.</p>
+    <p>WiP</p>
   </div>
 
   <div id="blog" class="tab">
     <h1>Blog</h1>
+      <a onclick="openTab('post-poems')">poems i like</a>
       <p>----------------------------------</p>
       <a onclick="openTab('post-welcome')">things i'm interested in</a>
       <p>----------------------------------</p>
@@ -106,6 +109,29 @@
     </figure>
 
     <p>The Mandelbrot set is the set of complex numbers c for which the sequence z_{n+1} = z_n^2 + c (starting at z_0 = 0) does not diverge. Tiny tweaks of parameters reveal intricate, self-similar patterns.</p>
+
+    <p><a onclick="openTab('blog')">← Back to Blog</a></p>
+  </div>
+
+  <div id="post-poems" class="tab">
+    <h1>poems i like</h1>
+
+    <h1>Everything is Going to be All Right</h1>
+
+    How should I not be glad to contemplate
+    the clouds clearing beyond the dormer window
+    and a high tide reflected on the ceiling?
+    There will be dying, there will be dying,
+    but there is no need to go into that.
+    The poems flow from the hand unbidden
+    and the hidden source is the watchful heart.
+    The sun rises in spite of everything
+    and the far cities are beautiful and bright.
+    I lie here in a riot of sunlight
+    watching the day break and the clouds flying.
+    Everything is going to be all right.
+
+    <div class="author">— Derek Mahon, from <em>Selected Poems</em></div>
 
     <p><a onclick="openTab('blog')">← Back to Blog</a></p>
   </div>
