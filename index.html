@@ -9,19 +9,19 @@
       font-family: "Courier New", monospace;
       margin: 0;
       padding: 0;
-      background: #fff;
-      color: #000;
+      background: #f0e6d4;
+      color: #3a3c50;
     }
     nav {
       display: flex;
       gap: 20px;
       padding: 20px;
-      border-bottom: 1px solid #000;
+      border-bottom: 1px solid #3a3c50;
     }
     nav a {
       cursor: pointer;
       text-decoration: none;
-      color: #000;
+      color: #3a3c50;
     }
     .tab {
       display: none;
@@ -40,7 +40,7 @@
     }
     .image-caption {
       font-size: 0.9rem;
-      color: #444;
+      color: #3a3c50;
       margin-bottom: 12px;
     }
   </style>
@@ -69,10 +69,10 @@
 
   <div id="blog" class="tab">
     <h1>Blog</h1>
-    <ul>
-      <li><a onclick="openTab('post-welcome')">things i'm interested in</a></li>
-      <li><a onclick="openTab('post-math-is-beautiful')">math is beautiful</a></li>
-    </ul>
+      <p>,</p>
+      <a onclick="openTab('post-welcome')">things i'm interested in</a>
+      <p>,</p>
+      <a onclick="openTab('post-math-is-beautiful')">math is beautiful</a>
   </div>
 
   <div id="post-welcome" class="tab">
