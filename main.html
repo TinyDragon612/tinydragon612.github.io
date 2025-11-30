@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Personal Website</title>
+  <style>
+    body {
+      font-family: "Courier New", monospace;
+      margin: 0;
+      padding: 0;
+      background: #fff;
+      color: #000;
+    }
+    nav {
+      display: flex;
+      gap: 20px;
+      padding: 20px;
+      border-bottom: 1px solid #000;
+    }
+    nav a {
+      cursor: pointer;
+      text-decoration: none;
+      color: #000;
+    }
+    .tab {
+      display: none;
+      padding: 20px;
+    }
+    .active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a onclick="openTab('home')">Home</a>
+    <a onclick="openTab('about')">About Me</a>
+    <a onclick="openTab('blog')">Blog</a>
+    <a onclick="openTab('projects')">Projects</a>
+  </nav>
+
+  <div id="home" class="tab active">
+    <h1>Welcome</h1>
+    <p>This is my minimalist website.</p>
+  </div>
+
+  <div id="about" class="tab">
+    <h1>About Me</h1>
+    <p>Write something about yourself here.</p>
+  </div>
+
+  <div id="blog" class="tab">
+    <h1>Blog</h1>
+    <h2>welcome to my website!</h2>
+    <p>This is my first blog post. More coming soon.</p>
+  </div>
+
+  <div id="projects" class="tab">
+    <h1>Projects</h1>
+    <h2>AstroPhoenix</h2>
+    <p>A brief description of your project AstroPhoenix.</p>
+  </div>
+
+  <script>
+    function openTab(name) {
+      const tabs = document.querySelectorAll('.tab');
+      tabs.forEach(t => t.classList.remove('active'));
+      document.getElementById(name).classList.add('active');
+    }
+  </script>
+</body>
+</html>
