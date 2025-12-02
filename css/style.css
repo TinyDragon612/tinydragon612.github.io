@@ -1,8 +1,7 @@
 .img-container {
   display: flex;
   justify-content: center;
-  gap: 20px;
-  margin: 20px 0;
+  flex-wrap: nowrap;
 }
 
 .img-container figure {
