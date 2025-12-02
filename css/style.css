@@ -1,0 +1,10 @@
+.img-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 20px 0;
+}
+
+.img-container figure {
+  text-align: center;
+}
