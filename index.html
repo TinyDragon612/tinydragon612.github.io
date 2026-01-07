@@ -44,6 +44,18 @@
       color: #3a3c50;
       margin-bottom: 12px;
     }
+    /* Make Prism/inline code blocks scrollable when long */
+    pre[class*="language-"] {
+      max-height: 320px;
+      overflow: auto;
+      padding: 12px;
+      border-radius: 6px;
+      background: #f5f2f0;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,0.02);
+    }
+    pre[class*="language-"] code {
+      white-space: pre;
+    }
   </style>
   <!-- Prism.js for syntax highlighting -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" />
