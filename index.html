@@ -45,6 +45,10 @@
       margin-bottom: 12px;
     }
   </style>
+  <!-- Prism.js for syntax highlighting -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" />
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
 </head>
 <body>
   <nav>
@@ -175,6 +179,7 @@
     <h1>Projects</h1>
     <ul>
       <li><a href="#project-astro">AstroPhoenix</a></li>
+      <li><a href="#project-trie">AstroPhoenix</a></li>
     </ul>
   </div>
 
@@ -191,6 +196,26 @@
     <p><a href="#projects">← Back to Projects</a></p>
   </div>
 
+  <div id="project-trie" class="tab">
+    <h1>Trie Project</h1>
+    <p>Example: a minimal Trie add method (Python)</p>
+    <pre><code class="language-python">class Trie:
+    def __init__(self):
+      self.children = {}
+      self.final = False
+
+    def add(self, word):
+      node = self
+      for ch in word:
+        if ch not in node.children:
+          node.children[ch] = Trie()
+        node = node.children[ch]
+      node.final = True
+    </code></pre>
+
+    <p><a href="#projects">← Back to Projects</a></p>
+  </div>
+
   <script>
     // Show the tab with the given id (does not modify history)
     function showTab(name) {
@@ -198,6 +223,11 @@
       tabs.forEach(t => t.classList.remove('active'));
       const el = document.getElementById(name);
       if (el) el.classList.add('active');
+      // If Prism is loaded, highlight any code blocks inside the shown tab
+      if (window.Prism && el) {
+        const codes = el.querySelectorAll('pre code');
+        codes.forEach(c => Prism.highlightElement(c));
+      }
     }
 
     // Change location hash to create a history entry; the hashchange
