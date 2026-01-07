@@ -1,13 +1,11 @@
-.img-container {
-  display: flex;
-  justify-content: center;
-  flex-wrap: nowrap;
+image-container {
+    display: flex; /* Aligns children (images) side by side */
+    justify-content: center; /* Horizontally centers the images within the container */
+    gap: 20px; /* Adds space between the images */
 }
 
-.img-container figure {
-  text-align: center;
-}
-
-.imgContainer{
-    float:left;
+.image-container img {
+    max-width: 100%;
+    height: auto;
+    width: 300px; /* Example fixed width */
 }

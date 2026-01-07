@@ -9,7 +9,7 @@
     body {
       font-family: "Andale Mono", monospace;
       margin: 0;
-      padding: 30px;
+      padding: 20px;
       background: #FAF9F5;
       color: #4a4a52;
     }
@@ -26,7 +26,7 @@
     }
     .tab {
       display: none;
-      padding: 30px;
+      padding: 20px;
     }
     .active {
       display: block;
@@ -48,10 +48,10 @@
 </head>
 <body>
   <nav>
-    <a onclick="openTab('home')">Home</a>
-    <a onclick="openTab('about')">About Me</a>
-    <a onclick="openTab('blog')">Blog</a>
-    <a onclick="openTab('projects')">Projects</a>
+    <a href="#home">Home</a>
+    <a href="#about">About Me</a>
+    <a href="#blog">Blog</a>
+    <a href="#projects">Projects</a>
   </nav>
 
   <div id="home" class="tab active">
@@ -77,13 +77,13 @@
       <a onclick="openTab('post-friends')">on friendship / where fun goes to die</a>
       <p>------------------------------------------</p>
   -->
-      <a onclick="openTab('cookies')">cookies</a>
+      <a href="#cookies">cookies</a>
       <p>------------------------------------------</p>
-      <a onclick="openTab('post-poems')">poems i like</a>
+      <a href="#post-poems">poems i like</a>
       <p>------------------------------------------</p>
-      <a onclick="openTab('post-interests')">things i'm interested in</a>
+      <a href="#post-interests">things i'm interested in</a>
       <p>------------------------------------------</p>
-      <a onclick="openTab('post-math-is-beautiful')">math is beautiful</a>
+      <a href="#post-math-is-beautiful">math is beautiful</a>
   </div>
 
   <div id="post-interests" class="tab">
@@ -113,7 +113,7 @@
 
     <p>Notes: use meaningful alt text for accessibility; prefer modern formats (WebP) for performance. If using a local image, create an <code>images/</code> folder and put the file there.</p>
     --> 
-    <p><a onclick="openTab('blog')">← Back to Blog</a></p>
+    <p><a href="#blog">← Back to Blog</a></p>
   </div>
 
 
@@ -123,7 +123,7 @@
       alt="Some wacky cookies"
       width="400" height="800"
       class="center-image">
-    <p><a onclick="openTab('blog')">← Back to Blog</a></p>
+    <p><a href="#blog">← Back to Blog</a></p>
   </div>
 
   <div id="post-math-is-beautiful" class="tab">
@@ -139,7 +139,7 @@
 
     <p>The Mandelbrot set is the set of complex numbers c for which the sequence z_{n+1} = z_n^2 + c (starting at z_0 = 0) does not diverge. Tiny tweaks of parameters reveal intricate, self-similar patterns.</p>
 
-    <p><a onclick="openTab('blog')">← Back to Blog</a></p>
+    <p><a href="#blog">← Back to Blog</a></p>
   </div>
 
   <div id="post-poems" class="tab">
@@ -182,13 +182,13 @@
 
     <div class="author">— Keith Leonard </div>
 
-    <p><a onclick="openTab('blog')">← Back to Blog</a></p>
+    <p><a href="#blog">← Back to Blog</a></p>
   </div>
 
   <div id="projects" class="tab">
     <h1>Projects</h1>
     <ul>
-      <li><a onclick="openTab('project-astro')">AstroPhoenix</a></li>
+      <li><a href="#project-astro">AstroPhoenix</a></li>
     </ul>
   </div>
 
@@ -197,29 +197,55 @@
     <p>This project was created for the 2025 Nasa Space Apps Challenge, my first ever hackathon! This was a lot of fun to make.</p>
     <p>Explore the platform here: https://awesomecoder412412.github.io/AstrophoenixWeb/</p>
 
-    <div class="imgContainer">
-        <img src="images/looking1.jpg"
-            alt="evie and haley"
-            width="300" height="400"
-            class="center-image">
-    </div>
-    <div class="imgContainer">
-        <img src="images/looking2.jpg"
-            alt="evie and haley"
-            width="300" height="400"
-            class="center-image">
-    </div>
-  </div>
+  <div class="image-container">
+    <img src="images/looking1.jpg" alt="evie and haley">
+    <img src="images/looking2.jpg" alt="evie and haley">
+</div>
 
-    <p><a onclick="openTab('projects')">← Back to Projects</a></p>
+    <p><a href="#projects">← Back to Projects</a></p>
   </div>
 
   <script>
-    function openTab(name) {
+    // Show the tab with the given id (does not modify history)
+    function showTab(name) {
       const tabs = document.querySelectorAll('.tab');
       tabs.forEach(t => t.classList.remove('active'));
-      document.getElementById(name).classList.add('active');
+      const el = document.getElementById(name);
+      if (el) el.classList.add('active');
     }
+
+    // Change location hash to create a history entry; the hashchange
+    // listener will call showTab.
+    function openTab(name) {
+      location.hash = name;
+    }
+
+    // When the hash changes (including when a link with href="#..." is clicked),
+    // show the correct tab.
+    window.addEventListener('hashchange', () => {
+      const name = location.hash.replace(/^#/, '') || 'home';
+      showTab(name);
+    });
+
+    // If a fragment link is clicked but the hash doesn't change (clicking the
+    // same anchor), call showTab directly so the UI still responds.
+    document.addEventListener('click', (e) => {
+      const a = e.target.closest('a[href^="#"]');
+      if (!a) return;
+      const name = a.getAttribute('href').replace(/^#/, '');
+      // allow normal navigation (hash will update), but if hash is unchanged,
+      // ensure the tab is shown.
+      if (location.hash.replace(/^#/, '') === name) {
+        e.preventDefault();
+        showTab(name);
+      }
+    });
+
+    // On initial load, show tab from hash or default to 'home'.
+    (function initFromHash() {
+      const name = location.hash.replace(/^#/, '') || 'home';
+      showTab(name);
+    })();
   </script>
 </body>
 </html>
