@@ -233,9 +233,9 @@
     <h1>Projects</h1>
     <ul>
       <li><a href="#project-astro">AstroPhoenix</a></li>
-      <li><a href="#project-trie">TrieSpeller</a></li>
       <li><a href="#project-handwriting">Handwriting Classification</a></li>
       <li><a href="#project-language">Language Classification</a></li>
+      <li><a href="#project-trie">TrieSpeller</a></li>
     </ul>
   </div>
 
@@ -396,31 +396,15 @@
 
   <div id="project-trie" class="tab">
     <h1>TrieSpeller</h1>
-    <p>A project using tries to make a spell-checker.</p>
+    <p>A simple project using tries to make a spell-checker.</p>
     <pre><code class="language-python">class Trie:
 
     def __init__(self, root):
-        '''
-        Constructor
-
-        Parameters:
-         root : str (a character, but Python does not have a "char" type)
-
-        Initialize root to given char, empty dict of children, final to False.
-        '''
         self.root = root
         self.children = {}
         self.final = False
 
     def add(self, word):
-        '''
-        Add the word to the trie.
-
-        Parameters:
-	     word : str
-
-        Returns: (does not return a value)
-        '''
         node = self
         for letter in word:
             if letter not in node.children:
@@ -429,14 +413,6 @@
         node.final = True
 
     def is_word(self, word):
-        '''
-        Check presence of given word in the trie.
-
-        Parameters:
-         word : str
-
-        Returns: boolean
-        '''
         node = self
         for letter in word:
             if letter not in node.children:
@@ -445,15 +421,6 @@
         return node.final
 
     def list_words(self):
-        '''
-        Return all the words in the trie. Returned list not guaranteed
-        in any particular order.
-
-        Parameters:
-         none
-
-        Returns: list[str]
-        '''
         words = []
         def recur(node, prefix):
             if node.final:
@@ -465,41 +432,12 @@
         return words
 
     def num_words(self):
-        '''
-        Return the number of words in the trie.
-
-        Parameters:
-          none
-
-        Returns: int
-        '''
         return len(self.list_words())
 
     def complete(self, prefix):
-        '''
-        Return all completions given prefix. The returned list is not
-        guaranteed to be in any particular order.
-
-        Parameters:
-          prefix : str
-
-        Returns: list[str]
-        '''
         return self._compl(prefix, "")
 
     def _compl(self, prefix, acc):
-        '''
-        Private method. Return all completions given prefix. The
-        parameter acc stores the string seen thus far in traversal of
-        the trie. The returned list is not guaranteed to be in any
-        particular order.
-
-        Parameters:
-          prefix : str
-          acc : str
-
-        Returns: list[str]
-        '''
         if prefix:
             start = prefix[0]
             if start not in self.children:
@@ -513,25 +451,9 @@
         return words
 
     def num_starting(self, prefix):
-        '''
-        Return the number of completions of the given prefix.
-
-        Parameters:
-          prefix : str
-
-        Returns: int
-        '''
         return len(self.complete(prefix))
 
     def num_next(self, prefix):
-        '''
-        Return the number of next letters given prefix.
-
-        Parameters:
-          prefix : str
-
-        Returns: int
-        '''
         node = self
         for letter in prefix:
             if letter not in node.children:
@@ -540,45 +462,17 @@
         return len(node.children)
 
 class TrieSpeller:
-    """
-    Class for a trie-based speller
-    """
 
     def __init__(self):
-        '''
-        Constructor
-
-        Parameters:
-          none
-
-        Initialize dictionary of empty tries, one per letter.
-        '''
         self.tries = {}
         for char in 'abcdefghijklmnopqrstuvwxyz':
             self.tries[char] = Trie(char)
 
     def add(self, word):
-        '''
-        Add the word to the trie if it consists only of lowercase
-        letters.
-
-        Parameters:
-          word : str
-
-        Returns: (does not return a value)
-        '''
         if word == word.lower() and word.isalpha():
             self.tries[word[0]].add(word[1:])
 
     def add_from_file(self, filename):
-        '''
-        Read the named file, add words (one per line in file).
-
-        Parameters:
-          filename : str
-
-        Returns: (does not return a value)
-        '''
         try:
             with open(filename, 'r') as f:
                 for line in f:
@@ -587,14 +481,6 @@ class TrieSpeller:
             return None
 
     def is_word(self, word):
-        '''
-        Check presence of given word in the object.
-
-        Parameters:
-          word : str
-
-        Returns: boolean
-        '''
         start = word[0]
         node = self.tries[start]
         for letter in word[1:]:
@@ -604,39 +490,14 @@ class TrieSpeller:
         return node.final
 
     def complete(self, prefix):
-        '''
-        Return all completions given prefix. The returned list is not
-        guaranteed to be in any particular order.
-
-        Parameters:
-          prefix : str
-
-        Returns: list[str]
-        '''
         start = prefix[0]
         words = self.tries[start].complete(prefix[1:])
         return set([start + w for w in words])
 
     def num_starting(self, prefix):
-        '''
-        Return the number of completions given prefix.
-
-        Parameters:
-          prefix : str
-
-        Returns: int
-        '''
         return len(self.complete(prefix))
 
     def num_next(self, prefix):
-        '''
-        Return the number of next letters given prefix.
-
-        Parameters:
-          prefix : str
-
-        Returns: int
-        '''
         node = self.tries[prefix[0]]
         for letter in prefix[1:]:
             if letter not in node.children:
@@ -645,29 +506,12 @@ class TrieSpeller:
         return len(node.children)
 
     def list_words(self):
-        '''
-        Return all the words in the object. Returned list not
-        guaranteed in any particular order.
-
-        Parameters:
-          none
-
-        Returns: list[str]
-        '''
         words = []
         for char, trie in self.tries.items():
             words.extend([char + w for w in trie.list_words()])
         return set(words)
 
     def num_words(self):
-        '''
-        Return the number of words in the object.
-
-        Parameters:
-          none
-
-        Returns: int
-        '''
         return len(self.list_words())
     </code></pre>
 
