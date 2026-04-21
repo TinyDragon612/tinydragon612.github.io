@@ -33,19 +33,40 @@
   </div>
 
   <div id="about" class="tab">
-    <h1>About Me</h1>
-    <p>Hey there! Welcome to my website. As of Autumn 2025, I'm a student at the University of Chicago studying computer science and philosophy. I'm interested in AI safety (model (mis)alignment, mechanistic interpretability, governance) and equally interested in art history, Latin, and numbered icosahedrons. If you have a cool idea or just want to chat, reach out.</p>
+    <div class="about-layout">
+      <div id="about-deco" aria-hidden="true"></div>
+      <div class="about-text">
+        <h1>About Me</h1>
+        <p>Hey there! Welcome to my website. As of Autumn 2025, I'm a student at the University of Chicago studying computer science and philosophy.</p>
+        <p>I'm interested in AI safety — model (mis)alignment, mechanistic interpretability, governance — and equally interested in art history, Latin, and numbered icosahedrons.</p>
+        <p>If you have a cool idea or just want to chat, reach out.</p>
+      </div>
+    </div>
   </div>
 
   <div id="blog" class="tab">
     <h1>Blog</h1>
-    <p>This is not so much a blog as it is some random postings. Planning on setting up a substack with some actual writing soon.</p>
-    <p>------------------------------------------</p>
-    <a href="#post-poems">poems i like</a>
-    <p>------------------------------------------</p>
-    <a href="#post-math-is-art">math is art</a>
-    <p>------------------------------------------</p>
-    <a href="#cookies">cookies</a>
+    <p class="section-subtitle">This is not so much a blog as it is some random postings. Planning on setting up a substack with some actual writing soon.</p>
+    <div class="card-grid">
+      <a href="#post-poems" class="card" style="--glow: rgb(233 213 255)">
+        <span class="card-plus">+</span>
+        <h2>poems i like</h2>
+        <p>A collection of poems that have resonated with me.</p>
+        <span class="card-tag">poetry</span>
+      </a>
+      <a href="#post-math-is-art" class="card" style="--glow: rgb(187 247 208)">
+        <span class="card-plus">+</span>
+        <h2>math is art</h2>
+        <p>On the unexpected beauty of mathematics — the Mandelbrot set and what it means.</p>
+        <span class="card-tag">math</span>
+      </a>
+      <a href="#cookies" class="card" style="--glow: rgb(254 240 138)">
+        <span class="card-plus">+</span>
+        <h2>cookies</h2>
+        <p>Sometimes you need to think outside the box.</p>
+        <span class="card-tag">misc</span>
+      </a>
+    </div>
   </div>
 
   <div id="post-interests" class="tab" data-src="blogs/interests.html"></div>
@@ -58,12 +79,33 @@
 
   <div id="projects" class="tab">
     <h1>Projects</h1>
-    <ul>
-      <li><a href="#project-astro">AstroPhoenix</a></li>
-      <li><a href="#project-handwriting">Handwriting Classification</a></li>
-      <li><a href="#project-language">Language Classification</a></li>
-      <li><a href="#project-trie">TrieSpeller</a></li>
-    </ul>
+    <div class="card-grid">
+      <a href="#project-astro" class="card" style="--glow: rgb(186 230 253)">
+        <span class="card-plus">+</span>
+        <h2>AstroPhoenix</h2>
+        <p>Built for the 2025 NASA Space Apps Challenge. An AI-powered research exploration platform.</p>
+        <span class="card-tag">web</span>
+        <span class="card-tag">ML</span>
+      </a>
+      <a href="#project-handwriting" class="card" style="--glow: rgb(199 210 254)">
+        <span class="card-plus">+</span>
+        <h2>Handwriting Classification</h2>
+        <p>Convolutional neural network classifying handwritten digits from the MNIST dataset.</p>
+        <span class="card-tag">ML</span>
+      </a>
+      <a href="#project-language" class="card" style="--glow: rgb(221 214 254)">
+        <span class="card-plus">+</span>
+        <h2>Language Classification</h2>
+        <p>Recurrent neural network for identifying the language of a given text sample.</p>
+        <span class="card-tag">ML</span>
+      </a>
+      <a href="#project-trie" class="card" style="--glow: rgb(254 202 202)">
+        <span class="card-plus">+</span>
+        <h2>TrieSpeller</h2>
+        <p>A trie-based spell-checker with prefix completion and word suggestions.</p>
+        <span class="card-tag">CS</span>
+      </a>
+    </div>
   </div>
 
   <div id="project-astro" class="tab" data-src="projects/astro.html"></div>

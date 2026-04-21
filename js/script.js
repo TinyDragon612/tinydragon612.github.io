@@ -31,6 +31,51 @@ window.addEventListener('popstate', () => {
 
 showTab(location.hash.slice(1) || 'home');
 
+// ── About page decorative grid ──
+(function initAboutDeco() {
+  const panel = document.getElementById('about-deco');
+  if (!panel) return;
+
+  const cols = 9, rows = 16;
+  const colors = [
+    'rgb(186 230 253)', 'rgb(251 207 232)', 'rgb(187 247 208)',
+    'rgb(254 240 138)', 'rgb(254 202 202)', 'rgb(233 213 255)',
+    'rgb(191 219 254)', 'rgb(199 210 254)', 'rgb(221 214 254)'
+  ];
+
+  // bar heights per column (out of `rows`)
+  const heights = [7, 11, 5, 14, 9, 6, 13, 8, 10];
+
+  let html = '';
+  for (let c = 0; c < cols; c++) {
+    html += '<div class="deco-col">';
+    for (let r = 0; r < rows; r++) {
+      const filled = r >= rows - heights[c];
+      const style = filled ? `background:${colors[c % colors.length]}` : '';
+      html += `<div class="deco-cell" style="${style}"></div>`;
+    }
+    html += '</div>';
+  }
+  panel.innerHTML = html;
+
+  panel.addEventListener('mouseover', e => {
+    const cell = e.target.closest('.deco-cell');
+    if (cell) {
+      cell.style.transition = 'background-color 0ms';
+      cell.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+    }
+  });
+  panel.addEventListener('mouseout', e => {
+    const cell = e.target.closest('.deco-cell');
+    if (!cell) return;
+    const diag = [...cell.parentElement.parentElement.children].indexOf(cell.parentElement)
+               + [...cell.parentElement.children].indexOf(cell);
+    const original = diag % 4 === 0 ? colors[diag % colors.length] : '';
+    cell.style.transition = 'background-color 600ms ease';
+    cell.style.backgroundColor = original;
+  });
+})();
+
 // ── Background boxes for home tab ──
 (function initBoxes() {
   const grid = document.getElementById('boxes-grid');
@@ -56,10 +101,16 @@ showTab(location.hash.slice(1) || 'home');
 
   grid.addEventListener('mouseover', e => {
     const cell = e.target.closest('.box-cell');
-    if (cell) cell.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+    if (cell) {
+      cell.style.transition = 'background-color 0ms';
+      cell.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+    }
   });
   grid.addEventListener('mouseout', e => {
     const cell = e.target.closest('.box-cell');
-    if (cell) cell.style.backgroundColor = '';
+    if (cell) {
+      cell.style.transition = 'background-color 600ms ease';
+      cell.style.backgroundColor = '';
+    }
   });
 })();
