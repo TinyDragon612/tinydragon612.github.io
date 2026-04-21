@@ -5,62 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Evie Hu's Website</title>
   <link rel="icon" type="image/png" href="images/cat.png">
-  <style>
-    body {
-      font-family: "Andale Mono", monospace;
-      margin: 0;
-      padding: 20px;
-      background: #FAF9F5;
-      color: #4a4a52;
-    }
-    nav {
-      display: flex;
-      gap: 20px;
-      padding: 20px;
-      border-bottom: 1px solid #4a4a52;
-    }
-    nav a {
-      cursor: pointer;
-      text-decoration: none;
-      color: #4a4a52;
-    }
-    .tab {
-      display: none;
-      padding: 20px;
-    }
-    .active {
-      display: block;
-    }
-    /* Blog image styles */
-    .blog-image {
-      max-width: 100%;
-      height: auto;
-      border-radius: 6px;
-      display: block;
-      margin: 12px 0;
-    }
-    .image-caption {
-      font-size: 0.9rem;
-      color: #3a3c50;
-      margin-bottom: 12px;
-    }
-    /* Make Prism/inline code blocks scrollable when long */
-    pre[class*="language-"] {
-      max-height: 320px;
-      overflow: auto;
-      padding: 12px;
-      border-radius: 6px;
-      background: #f5f2f0;
-      box-shadow: inset 0 0 0 1px rgba(0,0,0,0.02);
-    }
-    pre[class*="language-"] code {
-      white-space: pre;
-    }
-  </style>
+  <link rel="stylesheet" href="css/style.css">
   <!-- Prism.js for syntax highlighting -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" />
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+  <script defer src="js/script.js"></script>
 </head>
 <body>
   <nav>
@@ -88,19 +38,12 @@
   <div id="blog" class="tab">
     <h1>Blog</h1>
     <p>This is not so much a blog as it is some random postings. Planning on setting up a substack with some actual writing soon.</p>
-    <!-- 
-      <a onclick="openTab('post-FTC')">my most consuming and fufilling endeavour</a>
-      <p>------------------------------------------</p>
-      <a onclick="openTab('post-friends')">on friendship / where fun goes to die</a>
-      <p>------------------------------------------</p>
-      <a href="#post-interests">things i'm interested in</a>
-  -->
-      <p>------------------------------------------</p>
-      <a href="#post-poems">poems i like</a>
-      <p>------------------------------------------</p>
-      <a href="#post-math-is-art">math is art</a>
-      <p>------------------------------------------</p>
-      <a href="#cookies">cookies</a>
+    <p>------------------------------------------</p>
+    <a href="#post-poems">poems i like</a>
+    <p>------------------------------------------</p>
+    <a href="#post-math-is-art">math is art</a>
+    <p>------------------------------------------</p>
+    <a href="#cookies">cookies</a>
   </div>
 
   <div id="post-interests" class="tab">
@@ -518,52 +461,6 @@ class TrieSpeller:
     <p><a href="#projects">← Back to Projects</a></p>
   </div>
 
-  <script>
-    // Show the tab with the given id (does not modify history)
-    function showTab(name) {
-      const tabs = document.querySelectorAll('.tab');
-      tabs.forEach(t => t.classList.remove('active'));
-      const el = document.getElementById(name);
-      if (el) el.classList.add('active');
-      // If Prism is loaded, highlight any code blocks inside the shown tab
-      if (window.Prism && el) {
-        const codes = el.querySelectorAll('pre code');
-        codes.forEach(c => Prism.highlightElement(c));
-      }
-    }
-
-    // Change location hash to create a history entry; the hashchange
-    // listener will call showTab.
-    function openTab(name) {
-      location.hash = name;
-    }
-
-    // When the hash changes (including when a link with href="#..." is clicked),
-    // show the correct tab.
-    window.addEventListener('hashchange', () => {
-      const name = location.hash.replace(/^#/, '') || 'home';
-      showTab(name);
-    });
-
-    // If a fragment link is clicked but the hash doesn't change (clicking the
-    // same anchor), call showTab directly so the UI still responds.
-    document.addEventListener('click', (e) => {
-      const a = e.target.closest('a[href^="#"]');
-      if (!a) return;
-      const name = a.getAttribute('href').replace(/^#/, '');
-      // allow normal navigation (hash will update), but if hash is unchanged,
-      // ensure the tab is shown.
-      if (location.hash.replace(/^#/, '') === name) {
-        e.preventDefault();
-        showTab(name);
-      }
-    });
-
-    // On initial load, show tab from hash or default to 'home'.
-    (function initFromHash() {
-      const name = location.hash.replace(/^#/, '') || 'home';
-      showTab(name);
-    })();
-  </script>
 </body>
 </html>
+
