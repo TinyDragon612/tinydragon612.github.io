@@ -1,0 +1,119 @@
+<h1>TrieSpeller</h1>
+<p>A simple project using tries to make a spell-checker.</p>
+<pre><code class="language-python">class Trie:
+  def __init__(self, root):
+    self.root = root
+    self.children = {}
+    self.final = False
+
+  def add(self, word):
+    node = self
+    for letter in word:
+      if letter not in node.children:
+        node.children[letter] = Trie(letter)
+      node = node.children[letter]
+    node.final = True
+
+  def is_word(self, word):
+    node = self
+    for letter in word:
+      if letter not in node.children:
+        return False
+      node = node.children[letter]
+    return node.final
+
+  def list_words(self):
+    words = []
+    def recur(node, prefix):
+      if node.final:
+        words.append(prefix)
+      for letter, child in node.children.items():
+        recur(child, prefix + letter)
+
+    recur(self, "")
+    return words
+
+  def num_words(self):
+    return len(self.list_words())
+
+  def complete(self, prefix):
+    return self._compl(prefix, "")
+
+  def _compl(self, prefix, acc):
+    if prefix:
+      start = prefix[0]
+      if start not in self.children:
+        return []
+      return self.children[start]._compl(prefix[1:], acc + start)
+    words = []
+    if self.final:
+      words.append(acc)
+    for letter, child in self.children.items():
+      words.extend(child._compl("", acc + letter))
+    return words
+
+  def num_starting(self, prefix):
+    return len(self.complete(prefix))
+
+  def num_next(self, prefix):
+    node = self
+    for letter in prefix:
+      if letter not in node.children:
+        return 0
+      node = node.children[letter]
+    return len(node.children)
+
+class TrieSpeller:
+
+  def __init__(self):
+    self.tries = {}
+    for char in 'abcdefghijklmnopqrstuvwxyz':
+      self.tries[char] = Trie(char)
+
+  def add(self, word):
+    if word == word.lower() and word.isalpha():
+      self.tries[word[0]].add(word[1:])
+
+  def add_from_file(self, filename):
+    try:
+      with open(filename, 'r') as f:
+        for line in f:
+          self.add(line.strip())
+    except FileNotFoundError:
+      return None
+
+  def is_word(self, word):
+    start = word[0]
+    node = self.tries[start]
+    for letter in word[1:]:
+      if letter not in node.children:
+        return False
+      node = node.children[letter]
+    return node.final
+
+  def complete(self, prefix):
+    start = prefix[0]
+    words = self.tries[start].complete(prefix[1:])
+    return set([start + w for w in words])
+
+  def num_starting(self, prefix):
+    return len(self.complete(prefix))
+
+  def num_next(self, prefix):
+    node = self.tries[prefix[0]]
+    for letter in prefix[1:]:
+      if letter not in node.children:
+        return 0
+      node = node.children[letter]
+    return len(node.children)
+
+  def list_words(self):
+    words = []
+    for char, trie in self.tries.items():
+      words.extend([char + w for w in trie.list_words()])
+    return set(words)
+
+  def num_words(self):
+    return len(self.list_words())
+</code></pre>
+<p><a href="#projects">← Back to Projects</a></p>
