@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Evie Hu's Website</title>
   <link rel="icon" type="image/png" href="images/cat.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css">
   <!-- Prism.js for syntax highlighting -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" />
@@ -46,36 +49,36 @@
 
   <div id="blog" class="tab">
     <h1>Blog</h1>
-    <p class="section-subtitle">This is not so much a blog as it is some random postings. Planning on setting up a substack with some actual writing soon.</p>
     <div class="card-grid">
       <a href="#post-poems" class="card" style="--glow: rgb(233 213 255)">
         <span class="card-plus">+</span>
-        <h2>poems i like</h2>
+        <h2>Poems I Like</h2>
         <p>A collection of poems that have resonated with me.</p>
         <span class="card-tag">poetry</span>
       </a>
-      <a href="#post-math-is-art" class="card" style="--glow: rgb(187 247 208)">
+<a href="#post-welcome-to-blog" class="card" style="--glow: rgb(253 186 116)">
         <span class="card-plus">+</span>
-        <h2>math is art</h2>
-        <p>On the unexpected beauty of mathematics — the Mandelbrot set and what it means.</p>
-        <span class="card-tag">math</span>
+        <h2>Welcome to My Blog</h2>
+        <p>On beauty, writing, and why I'm starting this blog.</p>
+        <span class="card-tag">essay</span>
       </a>
-      <a href="#cookies" class="card" style="--glow: rgb(254 240 138)">
+      <a href="#post-safety-opportunities" class="card" style="--glow: rgb(165 243 252)">
         <span class="card-plus">+</span>
-        <h2>cookies</h2>
-        <p>Sometimes you need to think outside the box.</p>
-        <span class="card-tag">misc</span>
+        <h2>Fragile Opportunities for Safety</h2>
+        <p>On windows of opportunity for AI safety work that may close as capabilities scale.</p>
+        <span class="card-tag">AI safety</span>
+        <span class="card-tag">essay</span>
       </a>
     </div>
   </div>
 
   <div id="post-interests" class="tab" data-src="blogs/interests.html"></div>
 
-  <div id="cookies" class="tab" data-src="blogs/cookies.html"></div>
+<div id="post-poems" class="tab" data-src="blogs/poems.html"></div>
 
-  <div id="post-math-is-art" class="tab" data-src="blogs/math-is-art.html"></div>
+  <div id="post-welcome-to-blog" class="tab" data-src="blogs/welcome-to-blog.html"></div>
 
-  <div id="post-poems" class="tab" data-src="blogs/poems.html"></div>
+  <div id="post-safety-opportunities" class="tab" data-src="blogs/safety-opportunities.html"></div>
 
   <div id="projects" class="tab">
     <h1>Projects</h1>
@@ -105,6 +108,19 @@
         <p>A trie-based spell-checker with prefix completion and word suggestions.</p>
         <span class="card-tag">CS</span>
       </a>
+      <a href="#project-finance" class="card" style="--glow: rgb(167 243 208)">
+        <span class="card-plus">+</span>
+        <h2>Financial Management Platform</h2>
+        <p>A platform for tracking, budgeting, and visualizing personal finances.</p>
+        <span class="card-tag">web</span>
+      </a>
+      <a href="#project-covert-collude" class="card" style="--glow: rgb(253 230 138)">
+        <span class="card-plus">+</span>
+        <h2>Covert Collude</h2>
+        <p>A control setting for steganographic multi-agent collusion. Built for the 2026 Apart Research Control Hackathon.</p>
+        <span class="card-tag">AI safety</span>
+        <span class="card-tag">research</span>
+      </a>
     </div>
   </div>
 
@@ -115,6 +131,10 @@
   <div id="project-language" class="tab" data-src="projects/language.html"></div>
 
   <div id="project-trie" class="tab" data-src="projects/trie.html"></div>
+
+  <div id="project-finance" class="tab" data-src="projects/finance.html"></div>
+
+  <div id="project-covert-collude" class="tab" data-src="projects/covert-collude.html"></div>
 
 </body>
 </html>

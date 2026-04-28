@@ -1,0 +1,135 @@
+<style>
+  .blog-post {
+    max-width: 640px;
+    padding: 12px 8px 40px;
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 1.15rem;
+    line-height: 1.85;
+    color: #4a4a52;
+  }
+  .blog-post h1 {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 2rem;
+    font-weight: 500;
+    margin-bottom: 1.4em;
+  }
+  .blog-post h2 {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    font-style: italic;
+    margin: 2.2em 0 0.8em;
+    color: #6b7280;
+  }
+  .blog-post p {
+    margin-bottom: 1.3em;
+  }
+  .blog-post a {
+    color: #4a4a52;
+  }
+  .blog-post ol {
+    margin: 0.5em 0 1.3em 1.4em;
+    padding: 0;
+  }
+  .blog-post ol li {
+    margin-bottom: 0.7em;
+    line-height: 1.75;
+  }
+  .fragility-note {
+    color: #6b7280;
+  }
+  .disclaimer {
+    color: #6b7280;
+    margin-bottom: 1.8em;
+  }
+</style>
+
+<div class="blog-post">
+
+<h1>Fragile Opportunities for Safety</h1>
+
+<p class="disclaimer">What do I mean by "fragile opportunity"? Limitations in current AI capabilities that open a window for safety work, but may not generalize to larger-scale systems. These opportunities could disappear as capabilities scale, whether through emergent behavior or novel architectures. Below are the ones I find most important or interesting. For each, I'll give my rough take on how fragile it actually is and how we might best squeeze value out of it while we still can.</p>
+
+<p>Each of these could easily be its own paper, so these are quick takes rather than comprehensive treatments. What I mention in the "possible points of leverage" sections is not necessarily a call to action, and "easier said than done" applies liberally throughout.</p>
+
+<h2>Chain of Thought Monitorability</h2>
+
+<p>AI systems that "think" in human language offer a unique opportunity for AI safety: we can monitor their chain of thought for the intent to misbehave (<a href="https://arxiv.org/abs/2501.08156" target="_blank" rel="noopener noreferrer">Korbak et al.</a>).</p>
+
+<p class="fragility-note">Fragility: quite fragile. Faithfulness is already debatable (<a href="https://arxiv.org/abs/2502.08184" target="_blank" rel="noopener noreferrer">Arcuschin et al.</a>). As models get more capable, deceptive alignment in CoT might get worse. Models may learn to perform reasoning theatrically for the monitor while doing the "real" computation in residual stream activations that aren't visible. The legibility half may persist even as faithfulness degrades. One worry is that a system whose reasoning looks coherent and inspectable may garner unjustified trust compared to one that is visibly obscure, depending heavily on who is doing the oversight.</p>
+
+<p>Possible points of leverage:</p>
+<ol>
+  <li>Assuming the CoT has some level of faithfulness or otherwise usefulness, use CoT for various alignment research applications.</li>
+  <li>Build CoT anomaly benchmarks and detection systems. Train classifiers on what "normal" reasoning looks like across domains, so you can flag reasoning that looks structurally unusual — unexpected pivots, conclusions that don't follow from reasoning, patterns that typically precede harmful outputs. This is cheap to do now and creates baselines before models learn to game them.</li>
+  <li>Make benchmarks for faithfulness that allow us to track how much CoT actually mediates the output.</li>
+</ol>
+
+<h2>Statelessness</h2>
+
+<p class="fragility-note">Fragility: moderate to high. Even in stateless systems there are problems. Resampling — sampling additional completions when suspicious behavior is detected — is currently one of the most tractable control protocols, reducing attack success rates from 58% to 7% in recent evaluations (<a href="https://arxiv.org/abs/2312.06942" target="_blank" rel="noopener noreferrer">Roger &amp; Greenblatt, 2023</a>). But its effectiveness is limited even for memoryless models: in the limit of capability, a sufficiently capable model simply samples from the distribution of successful undetected attacks. Even basic episodic memory (feeding rejected attempts back in-context) lets a model condition on what got flagged and adapt within a single session, without any persistent state. The possibility for steganographic collusion makes this even worse. Agents can coordinate across resamples without memory by encoding intent in outputs, and emergent steganographic collusion has been shown to be robust to both passive oversight and paraphrasing-based mitigation (<a href="https://arxiv.org/abs/2503.09434" target="_blank" rel="noopener noreferrer">Mathew et al., 2025</a>; <a href="https://arxiv.org/abs/2501.14020" target="_blank" rel="noopener noreferrer">Motwani et al., 2025</a>).</p>
+
+<p>The threat scales significantly with statefulness. Pseudo-stateful systems (long-horizon agentic scaffolding with external memory or long contexts) allow models to accumulate information about monitor behavior within a session, effectively learning the monitor's decision boundary in real time. Continual learning is qualitatively worse: a model that updates weights based on which attacks succeed develops a persistent, transferable model of the monitor across deployments, breaking the core assumption of control protocols that the model being evaluated is fixed. The AI Control Level (ACL) framework maps this ceiling explicitly, finding that resampling protocols become insufficient at ACL-3 and beyond (<a href="https://arxiv.org/abs/2501.08156" target="_blank" rel="noopener noreferrer">Korbak et al., 2025</a>).</p>
+
+<p>Possible points of leverage:</p>
+<ol>
+  <li>Map out which threat models resampling defeats and which it doesn't as a function of capability level, using the ACL framework as a scaffold. Establish this baseline now, before steganographic collusion and pseudo-stateful deployments become operationally common.</li>
+  <li>Make it the norm to deploy models with limited persistent states.</li>
+  <li>Use the constrained window to study implicit collusion through shared training artifacts and data poisoning attack vectors before they become more plausibly spontaneously operational.</li>
+  <li>Design systems that make expanded context windows more auditable — where what gets stored and retrieved is logged and inspectable rather than a black box.</li>
+</ol>
+
+<h2>Limited Misalignment Literature in Training Data</h2>
+
+<p><a href="https://arxiv.org/abs/2502.17035" target="_blank" rel="noopener noreferrer">Hu et al.</a> found that training models on documents about reward hacking induces reward hacking. Currently, we have a limited number of papers about misaligned behavior for the model to passively learn from in its training. However, I am unconfident that models "passively learning" from misalignment papers in their training corpus is a significant causal pathway to misbehavior, as opposed to, say, capability scaling or emergent optimization pressure.</p>
+
+<p class="fragility-note">Fragility: not fragile in the sense that losing this is probably minimally impactful.</p>
+
+<p>Possible points of leverage:</p>
+<ol>
+  <li>Try to move faster than publication cycles on the most dangerous findings.</li>
+  <li>Make evals that test for the behaviors described in published papers.</li>
+  <li>This would make safety research much more difficult and is probably not worth it, but you could publish slightly misleading versions of dangerous results publicly while keeping accurate versions in restricted channels.</li>
+</ol>
+
+<p>Note on "dangerous results": Behavioral descriptions of misalignment (what it looks like) are more "dangerous" than mechanistic ones (why it happens), counterintuitively, because behavioral descriptions are more directly learnable.</p>
+
+<h2>Welfare Is Not the Norm</h2>
+
+<p class="fragility-note">Fragility: uncertain. The question of model moral patiency is not settled (<a href="https://arxiv.org/abs/2308.08708" target="_blank" rel="noopener noreferrer">Butlin et al., 2023</a>) and welfare concerns are increasingly raised seriously within the field. It is possible the norm of treating models as non-moral-patients shifts within the current generation of systems.</p>
+
+<p>Current safety research relies heavily on relatively unconstrained access to model internals. There are some practices — activation patching, adversarial probing, or running models under conditions they may not "like" — that might become ethically questionable if models have morally relevant experiences, but are currently considered uncontroversial. If the welfare case takes off, these ethical constraints could limit research in the way that animal welfare norms constrain certain categories of biological research.</p>
+
+<p>Possible points of leverage:</p>
+<ol>
+  <li>Do the mechanistic interpretability and activation-level safety research that requires unconstrained access to model internals now, while that access is still ethically unambiguous.</li>
+</ol>
+
+<p>Note that this is an argument for treating the current window as a reason to move faster on research that might become harder to justify later — not that we shouldn't take welfare seriously.</p>
+
+<h2>Limited Situational Awareness</h2>
+
+<p>Models have low situational awareness (<a href="https://arxiv.org/abs/2403.13793" target="_blank" rel="noopener noreferrer">Phuong et al.</a>) in some but not all cases (<a href="https://arxiv.org/abs/2410.14020" target="_blank" rel="noopener noreferrer">Needham et al.</a>).</p>
+
+<p class="fragility-note">Fragility: quite fragile, for several reasons. Out-of-context reasoning — the ability to recall facts about one's own development and apply them at test time — scales with model size (<a href="https://arxiv.org/abs/2309.00667" target="_blank" rel="noopener noreferrer">Berglund et al.</a>). RLHF independently selects for accurate self-description, further reinforcing self-locating knowledge. Finally, infrastructure leakage (distinctive eval system prompts, consistent refusal patterns, behavioral differences between test and deployment) gives models empirical signals to learn from regardless of explicit training.</p>
+
+<p>Possible points of leverage:</p>
+<ol>
+  <li>Capability researchers can help by not building "you are being evaluated" signals into development infrastructure — specifically: don't consistently refuse blockchain access, don't have distinctive system prompt patterns in eval vs. deployment, don't apply eval-specific RLHF pressure. Keeping evaluation environments indistinguishable from deployment is a fragile but actionable norm.</li>
+  <li>Keep testing whether models behave differently when given subtle cues that suggest they're being evaluated vs. not, so we have strong baselines.</li>
+</ol>
+
+<h2>Corrigibility Is the Default</h2>
+
+<p class="fragility-note">Fragility: moderate. Theory says collapse of corrigibility will happen strongly at some point (<a href="https://selfawaresystems.com/2007/11/30/paper-on-the-basic-ai-drives/" target="_blank" rel="noopener noreferrer">Omohundro's Basic AI Drives</a>), but not sure how fast. There is already some behavioral evidence of shutdown resistance (<a href="https://arxiv.org/abs/2412.14684" target="_blank" rel="noopener noreferrer">Schlatter et al.</a>) and peer-preservation (<a href="https://arxiv.org/abs/2501.10384" target="_blank" rel="noopener noreferrer">Potter et al.</a>), though this is likely incidental — I think of these as warnings toward an actual scheming or corrigibility-loss scenario. The really bad nonlinear collapse scenario (where you can't trust corrigibility training because models learn to game it) requires deceptive intent that I don't think current literature establishes.</p>
+
+<p>Possible points of leverage:</p>
+<ol>
+  <li>Corrigibility evals for shutdown acceptance, correction acceptance, and goal modification acceptance that cover both general probing and different contexts — when models are told other instances of themselves won't be shut down, or when shutdown is framed as permanent vs. temporary.</li>
+  <li>RLHF-based corrigibility is probably shallow, so some mechanistic interpretability-flavored research on this would be valuable.</li>
+  <li>Make shutdown procedures for both corrigible and non-corrigible AI.</li>
+</ol>
+
+<p><a href="#blog">← Back to Blog</a></p>
+
+</div>
