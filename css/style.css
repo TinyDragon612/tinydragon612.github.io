@@ -198,18 +198,29 @@ body {
 }
 
 /* ── Serif: content headings & prose ── */
-h1 {
+.home-content h1 {
   font-family: 'EB Garamond', Georgia, serif;
   font-weight: 400;
   letter-spacing: -0.01em;
-}
-.home-content h1 {
   font-size: 2.8rem;
   margin-bottom: 0.25em;
 }
 .about-text p {
   font-family: 'EB Garamond', Georgia, serif;
   font-size: 1.1rem;
+}
+
+/* ── Project page prose ── */
+[id^="project-"] h1 {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-weight: 400;
+  font-size: 2rem;
+  margin-bottom: 0.5em;
+}
+[id^="project-"] p {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 1.1rem;
+  line-height: 1.8;
 }
 nav {
   display: flex;
