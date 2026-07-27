@@ -1,8 +1,90 @@
+// ── Redaction grades: shared by the About decipher and hover pixelation ──
+const rxGrades = ['Redaction 100', 'Redaction 70', 'Redaction 50',
+                  'Redaction 35', 'Redaction 20', 'Redaction 10'];
+const rxReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+let rxFontsReady = null;
+const loadRxGrades = () =>
+  rxFontsReady = rxFontsReady || Promise.all(rxGrades.map(g => document.fonts.load(`16px '${g}'`)));
+
+// ── About text decipher: step down through the degraded grades ──
+const decipherAbout = (() => {
+  const stepMs = 170;
+  let run = 0;
+  return () => {
+    const text = document.querySelector('.about-text');
+    if (!text || rxReduced) return;
+    const id = ++run;
+    // wait for the grade fonts so every step renders, not the fallback
+    loadRxGrades().then(() => {
+      if (id !== run) return;
+      rxGrades.forEach((g, i) => {
+        setTimeout(() => {
+          if (id === run) text.style.setProperty('--about-font', `'${g}', Georgia, serif`);
+        }, i * stepMs);
+      });
+      setTimeout(() => {
+        if (id === run) text.style.removeProperty('--about-font');
+      }, rxGrades.length * stepMs);
+    });
+  };
+})();
+
+// ── Hover pixelation: words snap to the roughest grade, then re-resolve ──
+// wrap each word in a span so it can carry its own font
+function wrapWords(el) {
+  if (el.dataset.rxWrapped) return;
+  el.dataset.rxWrapped = 'true';
+  const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+  const nodes = [];
+  while (walker.nextNode()) nodes.push(walker.currentNode);
+  nodes.forEach(node => {
+    if (!node.nodeValue.trim()) return;
+    const frag = document.createDocumentFragment();
+    node.nodeValue.split(/(\s+)/).forEach(part => {
+      if (!part) return;
+      if (/\s/.test(part)) {
+        frag.appendChild(document.createTextNode(part));
+      } else {
+        const span = document.createElement('span');
+        span.className = 'rx-word';
+        span.textContent = part;
+        frag.appendChild(span);
+      }
+    });
+    node.parentNode.replaceChild(frag, node);
+  });
+}
+
+(function initPixelHover() {
+  // static targets: the whole About text plus the landing and section titles
+  document.querySelectorAll(
+    '.about-text h1, .about-text h2, .about-text p, .home-content h1, #blog > h1, #projects > h1'
+  ).forEach(wrapWords);
+
+  const back = rxGrades.slice(1);
+  document.addEventListener('mouseover', e => {
+    const word = e.target.closest('.rx-word');
+    if (!word) return;
+    loadRxGrades();
+    (word._rx || []).forEach(clearTimeout);
+    word.style.fontFamily = "'Redaction 100', Georgia, serif";
+  });
+  document.addEventListener('mouseout', e => {
+    const word = e.target.closest('.rx-word');
+    if (!word) return;
+    if (rxReduced) { word.style.fontFamily = ''; return; }
+    word._rx = back.map((g, i) =>
+      setTimeout(() => { word.style.fontFamily = `'${g}', Georgia, serif`; }, (i + 1) * 110));
+    word._rx.push(setTimeout(() => { word.style.fontFamily = ''; }, (back.length + 1) * 110));
+  });
+})();
+
 function showTab(name) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   const el = document.getElementById(name);
   if (!el) return;
   el.classList.add('active');
+  if (name === 'about') decipherAbout();
 
   // highlight the nav tab for the current section (posts → Blog, projects → Projects)
   const section = name.startsWith('post-') ? 'blog'
@@ -16,6 +98,8 @@ function showTab(name) {
       .then(r => r.text())
       .then(html => {
         el.innerHTML = html;
+        // page titles get the hover pixelation once the fragment lands
+        el.querySelectorAll('h1, .likes-heading').forEach(wrapWords);
         if (window.Prism) el.querySelectorAll('pre code').forEach(c => Prism.highlightElement(c));
       })
       .catch(err => console.error('Error loading content:', err));
