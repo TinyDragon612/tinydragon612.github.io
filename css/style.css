@@ -186,6 +186,13 @@ html.dark {
   line-height: 1.8;
   margin-bottom: 1.1em;
 }
+.about-text .about-updated {
+  font-family: "Andale Mono", monospace;
+  font-size: 0.72rem;
+  color: var(--faint);
+  letter-spacing: 0.04em;
+  margin: 3em 0 0;
+}
 #about-deco {
   display: flex;
   flex-shrink: 0;

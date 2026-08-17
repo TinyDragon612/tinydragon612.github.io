@@ -58,7 +58,7 @@ function wrapWords(el) {
 (function initPixelHover() {
   // static targets: the whole About text plus the landing and section titles
   document.querySelectorAll(
-    '.about-text h1, .about-text h2, .about-text p, .home-content h1, #blog > h1, #projects > h1'
+    '.about-text h1, .about-text h2, .about-text p:not(.about-updated), .home-content h1, #blog > h1, #projects > h1'
   ).forEach(wrapWords);
 
   const back = rxGrades.slice(1);
@@ -161,6 +161,27 @@ showTab(location.hash.slice(1) || 'home');
     panel.innerHTML = html;
   }
 
+  // on the first reveal, wipe the fill and cascade it back in: bars grow
+  // bottom-up, columns sweep left to right
+  let entered = false;
+  function entrance() {
+    if (entered) return;
+    entered = true;
+    if (rxReduced) return;
+    [...panel.children].forEach((colEl, c) => {
+      [...colEl.children].forEach((cell, r) => {
+        const color = cell.style.backgroundColor;
+        if (!color) return;
+        cell.style.transition = 'background-color 0ms';
+        cell.style.backgroundColor = '';
+        setTimeout(() => {
+          cell.style.transition = 'background-color 450ms ease';
+          cell.style.backgroundColor = color;
+        }, 150 + c * 70 + (colEl.children.length - 1 - r) * 35);
+      });
+    });
+  }
+
   // match the grid height to the text column; the tab is display:none at
   // load, so the observer builds it once the tab first becomes visible
   function sync() {
@@ -168,6 +189,7 @@ showTab(location.hash.slice(1) || 'home');
     if (target > 0 && target !== rows) {
       rows = target;
       build();
+      entrance();
     }
   }
 
