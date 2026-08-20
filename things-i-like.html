@@ -23,17 +23,12 @@
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     border: 1px solid var(--border);
-    border-radius: 16px;
     overflow: hidden;
-    transition: transform 220ms ease, box-shadow 300ms ease, border-color 300ms ease;
+    transition: box-shadow 300ms ease, border-color 300ms ease;
   }
   .likes-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 32px var(--glow, rgb(186 230 253)), 0 2px 8px var(--shadow);
-    border-color: var(--glow, rgb(186 230 253));
-  }
-  html.dark .likes-item:hover {
-    box-shadow: 0 8px 32px -8px var(--glow, rgb(186 230 253)), 0 2px 8px var(--shadow);
+    box-shadow: 0 2px 8px var(--shadow);
+    border-color: var(--glow, #7798AB);
   }
   .likes-art {
     padding: 14px;
@@ -42,7 +37,6 @@
     width: 100%;
     height: auto;
     display: block;
-    border-radius: 8px;
   }
   .likes-art figcaption {
     padding: 12px 4px 2px;
@@ -100,7 +94,7 @@
     transition: color 300ms ease;
   }
   .likes-song:hover .likes-song-arrow {
-    color: var(--glow, rgb(186 230 253));
+    color: var(--glow, #7798AB);
   }
   .likes-wave {
     display: flex;
@@ -111,8 +105,7 @@
   }
   .likes-wave i {
     width: 5px;
-    border-radius: 999px;
-    background: var(--glow, rgb(186 230 253));
+    background: var(--glow, #7798AB);
   }
   .likes-wave i:nth-child(1) { height: 40%; }
   .likes-wave i:nth-child(2) { height: 75%; }
@@ -146,7 +139,6 @@
     width: 100%;
     aspect-ratio: 16 / 9;
     border: 0;
-    border-radius: 8px;
     display: block;
   }
   .likes-video figcaption {
@@ -165,7 +157,6 @@
   .likes-video-thumb {
     display: block;
     position: relative;
-    border-radius: 8px;
     overflow: hidden;
   }
   .likes-video-thumb img {
@@ -179,7 +170,6 @@
     margin: auto;
     width: 54px;
     height: 54px;
-    border-radius: 999px;
     background: var(--nav-bg);
     border: 1px solid var(--border);
     display: flex;
@@ -198,7 +188,7 @@
   }
   .likes-video-link:hover .likes-play {
     transform: scale(1.1);
-    background: var(--glow, rgb(186 230 253));
+    background: var(--glow, #7798AB);
   }
   /* ── Comics ── */
   .likes-comic {
@@ -212,7 +202,6 @@
     height: auto;
     display: block;
     margin: 0 auto;
-    border-radius: 8px;
   }
   /* ── Websites of cool people ── */
   .likes-people {
@@ -232,18 +221,15 @@
   .likes-person {
     font-size: 0.78rem;
     padding: 5px 14px;
-    border-radius: 999px;
     background: var(--tag-bg);
     border: 1px solid var(--border);
     color: var(--text);
     text-decoration: none;
     letter-spacing: 0.04em;
-    transition: transform 220ms ease, box-shadow 300ms ease, border-color 300ms ease;
+    transition: border-color 300ms ease;
   }
   .likes-person:hover {
-    transform: translateY(-2px);
-    border-color: var(--glow, rgb(186 230 253));
-    box-shadow: 0 4px 14px var(--glow, rgb(186 230 253));
+    border-color: var(--glow, #7798AB);
   }
   /* ── Essays ── */
   .likes-essay {
@@ -272,26 +258,26 @@
 <div class="likes-people">
   <h2 class="likes-heading">Websites of Cool People I Know</h2>
   <div class="likes-people-list">
-    <a class="likes-person" href="https://joneedssleep.github.io/" target="_blank" rel="noopener" style="--glow: rgb(186 230 253)">Jo</a>
-    <a class="likes-person" href="https://zephaniahdev.com/" target="_blank" rel="noopener" style="--glow: rgb(251 207 232)">Zephy</a>
-    <a class="likes-person" href="https://sites.google.com/view/lxhcas-chen/home" target="_blank" rel="noopener" style="--glow: rgb(187 247 208)">Lucas</a>
-    <a class="likes-person" href="https://yixiong.dev/" target="_blank" rel="noopener" style="--glow: rgb(254 240 138)">Yixiong</a>
-    <a class="likes-person" href="https://parvmahajan.com/" target="_blank" rel="noopener" style="--glow: rgb(254 202 202)">Parv</a>
-    <a class="likes-person" href="https://helenatran.com/" target="_blank" rel="noopener" style="--glow: rgb(233 213 255)">Helena</a>
-    <a class="likes-person" href="https://aeliyagrover.vercel.app/index.html" target="_blank" rel="noopener" style="--glow: rgb(191 219 254)">Aeliya</a>
-    <a class="likes-person" href="https://jcksanderson.com/" target="_blank" rel="noopener" style="--glow: rgb(199 210 254)">Jack</a>
-    <a class="likes-person" href="https://rociopv.com/" target="_blank" rel="noopener" style="--glow: rgb(221 214 254)">Rocio</a>
-    <a class="likes-person" href="https://coby.lk/" target="_blank" rel="noopener" style="--glow: rgb(253 186 116)">Coby</a>
-    <a class="likes-person" href="https://brandonsayler.com/" target="_blank" rel="noopener" style="--glow: rgb(186 230 253)">Brandon</a>
-    <a class="likes-person" href="https://christinecorry.github.io/" target="_blank" rel="noopener" style="--glow: rgb(251 207 232)">Christine</a>
-    <a class="likes-person" href="https://haleyc0pter.github.io/index.html" target="_blank" rel="noopener" style="--glow: rgb(187 247 208)">Haley</a>
-    <a class="likes-person" href="https://total-anayalation.github.io/index.html" target="_blank" rel="noopener" style="--glow: rgb(254 240 138)">Anaya</a>
-    <a class="likes-person" href="https://jeremykintana.com/" target="_blank" rel="noopener" style="--glow: rgb(254 202 202)">Jeremy</a>
-    <a class="likes-person" href="https://www.kaustubhais.com/" target="_blank" rel="noopener" style="--glow: rgb(233 213 255)">Kaustubh</a>
-    <a class="likes-person" href="https://anastasiakwei.github.io/" target="_blank" rel="noopener" style="--glow: rgb(191 219 254)">Anastasia</a>
-    <a class="likes-person" href="https://harshul.org/" target="_blank" rel="noopener" style="--glow: rgb(199 210 254)">Harshul</a>
-    <a class="likes-person" href="https://awestover.github.io/" target="_blank" rel="noopener" style="--glow: rgb(221 214 254)">Alek</a>
-    <a class="likes-person" href="https://0ak.hu/" target="_blank" rel="noopener" style="--glow: rgb(253 186 116)">Oak</a>
+    <a class="likes-person" href="https://joneedssleep.github.io/" target="_blank" rel="noopener" style="--glow: #7798AB">Jo</a>
+    <a class="likes-person" href="https://zephaniahdev.com/" target="_blank" rel="noopener" style="--glow: #C3DBC5">Zephy</a>
+    <a class="likes-person" href="https://sites.google.com/view/lxhcas-chen/home" target="_blank" rel="noopener" style="--glow: #FF8484">Lucas</a>
+    <a class="likes-person" href="https://yixiong.dev/" target="_blank" rel="noopener" style="--glow: #114B5F">Yixiong</a>
+    <a class="likes-person" href="https://parvmahajan.com/" target="_blank" rel="noopener" style="--glow: #574B60">Parv</a>
+    <a class="likes-person" href="https://helenatran.com/" target="_blank" rel="noopener" style="--glow: #7798AB">Helena</a>
+    <a class="likes-person" href="https://aeliyagrover.vercel.app/index.html" target="_blank" rel="noopener" style="--glow: #C3DBC5">Aeliya</a>
+    <a class="likes-person" href="https://jcksanderson.com/" target="_blank" rel="noopener" style="--glow: #FF8484">Jack</a>
+    <a class="likes-person" href="https://rociopv.com/" target="_blank" rel="noopener" style="--glow: #114B5F">Rocio</a>
+    <a class="likes-person" href="https://coby.lk/" target="_blank" rel="noopener" style="--glow: #574B60">Coby</a>
+    <a class="likes-person" href="https://brandonsayler.com/" target="_blank" rel="noopener" style="--glow: #7798AB">Brandon</a>
+    <a class="likes-person" href="https://christinecorry.github.io/" target="_blank" rel="noopener" style="--glow: #C3DBC5">Christine</a>
+    <a class="likes-person" href="https://haleyc0pter.github.io/index.html" target="_blank" rel="noopener" style="--glow: #FF8484">Haley</a>
+    <a class="likes-person" href="https://total-anayalation.github.io/index.html" target="_blank" rel="noopener" style="--glow: #114B5F">Anaya</a>
+    <a class="likes-person" href="https://jeremykintana.com/" target="_blank" rel="noopener" style="--glow: #574B60">Jeremy</a>
+    <a class="likes-person" href="https://www.kaustubhais.com/" target="_blank" rel="noopener" style="--glow: #7798AB">Kaustubh</a>
+    <a class="likes-person" href="https://anastasiakwei.github.io/" target="_blank" rel="noopener" style="--glow: #C3DBC5">Anastasia</a>
+    <a class="likes-person" href="https://harshul.org/" target="_blank" rel="noopener" style="--glow: #FF8484">Harshul</a>
+    <a class="likes-person" href="https://awestover.github.io/" target="_blank" rel="noopener" style="--glow: #114B5F">Alek</a>
+    <a class="likes-person" href="https://0ak.hu/" target="_blank" rel="noopener" style="--glow: #574B60">Oak</a>
   </div>
 </div>
 
@@ -299,7 +285,7 @@
 
 <div class="likes-gallery">
 
-  <figure class="likes-item likes-art" style="--glow: rgb(254 240 138)">
+  <figure class="likes-item likes-art" style="--glow: #7798AB">
     <img src="images/art-i-like/Architect’s_Dream.jpg" alt="The Architect's Dream by Thomas Cole" loading="lazy">
     <figcaption>
       <span class="likes-title">The Architect's Dream</span>
@@ -307,7 +293,7 @@
     </figcaption>
   </figure>
 
-  <figure class="likes-item likes-art" style="--glow: rgb(187 247 208)">
+  <figure class="likes-item likes-art" style="--glow: #C3DBC5">
     <img src="images/art-i-like/cole-pastoral-state.jpg" alt="The Course of Empire: The Arcadian or Pastoral State by Thomas Cole" loading="lazy">
     <figcaption>
       <span class="likes-title">The Course of Empire: The Arcadian or Pastoral State</span>
@@ -315,14 +301,14 @@
     </figcaption>
   </figure>
 
-  <a class="likes-item likes-song" href="https://www.youtube.com/watch?v=0wFVsbbrEHQ" target="_blank" rel="noopener" style="--glow: rgb(251 207 232)">
+  <a class="likes-item likes-song" href="https://www.youtube.com/watch?v=0wFVsbbrEHQ" target="_blank" rel="noopener" style="--glow: #FF8484">
     <span class="likes-song-arrow">↗</span>
     <span class="likes-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
     <span class="likes-title">Real Love Baby</span>
     <span class="likes-artist">Father John Misty</span>
   </a>
 
-  <div class="likes-item likes-poem" style="--glow: rgb(233 213 255)">
+  <div class="likes-item likes-poem" style="--glow: #114B5F">
     <h2>Everything is Going to be All Right</h2>
     <div class="likes-poem-text">
       How should I not be glad to contemplate<br>
@@ -341,7 +327,7 @@
     <span class="likes-artist">Derek Mahon</span>
   </div>
 
-  <div class="likes-item likes-poem" style="--glow: rgb(254 202 202)">
+  <div class="likes-item likes-poem" style="--glow: #574B60">
     <h2>A Brief for the Defense</h2>
     <div class="likes-poem-text">
       Sorrow everywhere. Slaughter everywhere. If babies<br>
@@ -378,7 +364,7 @@
     <span class="likes-artist">Jack Gilbert</span>
   </div>
 
-  <figure class="likes-item likes-art" style="--glow: rgb(253 230 138)">
+  <figure class="likes-item likes-art" style="--glow: #7798AB">
     <img src="images/art-i-like/The_School_of_Athens.jpg" alt="The School of Athens by Raphael" loading="lazy">
     <figcaption>
       <span class="likes-title">The School of Athens</span>
@@ -386,7 +372,7 @@
     </figcaption>
   </figure>
 
-  <a class="likes-item likes-poem likes-essay" href="https://poets.org/poem/having-coke-you" target="_blank" rel="noopener" style="--glow: rgb(253 186 116)">
+  <a class="likes-item likes-poem likes-essay" href="https://poets.org/poem/having-coke-you" target="_blank" rel="noopener" style="--glow: #C3DBC5">
     <h2>Having a Coke with You</h2>
     <div class="likes-poem-text">
       is even more fun than going to San Sebastian, Irún, Hendaye, Biarritz, Bayonne<br>
@@ -400,14 +386,14 @@
     <span class="likes-essay-more">keep reading ↗</span>
   </a>
 
-  <a class="likes-item likes-song" href="https://www.youtube.com/watch?v=8twpQTna_9w" target="_blank" rel="noopener" style="--glow: rgb(254 240 138)">
+  <a class="likes-item likes-song" href="https://www.youtube.com/watch?v=8twpQTna_9w" target="_blank" rel="noopener" style="--glow: #FF8484">
     <span class="likes-song-arrow">↗</span>
     <span class="likes-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
     <span class="likes-title">I Wanna Get Better</span>
     <span class="likes-artist">Bleachers</span>
   </a>
 
-  <figure class="likes-item likes-art" style="--glow: rgb(186 230 253)">
+  <figure class="likes-item likes-art" style="--glow: #114B5F">
     <img src="images/art-i-like/monet-bridge.jpg" alt="Waterloo Bridge, Sunlight Effect by Claude Monet" loading="lazy">
     <figcaption>
       <span class="likes-title">Waterloo Bridge, Sunlight Effect</span>
@@ -415,7 +401,7 @@
     </figcaption>
   </figure>
 
-  <figure class="likes-item likes-video" style="--glow: rgb(254 202 202)">
+  <figure class="likes-item likes-video" style="--glow: #574B60">
     <iframe src="https://www.youtube-nocookie.com/embed/Dg0h9iZ1ZAg" title="Alysa Liu wins the Olympic gold medal for the United States" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     <figcaption>
       <span class="likes-title">Alysa Liu Wins Olympic Gold</span>
@@ -423,14 +409,14 @@
     </figcaption>
   </figure>
 
-  <a class="likes-item likes-song" href="https://www.youtube.com/watch?v=4K6cvc27_CE" target="_blank" rel="noopener" style="--glow: rgb(191 219 254)">
+  <a class="likes-item likes-song" href="https://www.youtube.com/watch?v=4K6cvc27_CE" target="_blank" rel="noopener" style="--glow: #7798AB">
     <span class="likes-song-arrow">↗</span>
     <span class="likes-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
     <span class="likes-title">Wish You Were Here</span>
     <span class="likes-artist">Pink Floyd</span>
   </a>
 
-  <figure class="likes-item likes-art" style="--glow: rgb(254 202 202)">
+  <figure class="likes-item likes-art" style="--glow: #C3DBC5">
     <img src="images/art-i-like/laocoön.jpg" alt="Laocoön and His Sons, attributed to Agesander, Athenodoros, and Polydorus of Rhodes" loading="lazy">
     <figcaption>
       <span class="likes-title">Laocoön and His Sons</span>
@@ -438,14 +424,14 @@
     </figcaption>
   </figure>
 
-  <a class="likes-item likes-song" href="https://www.youtube.com/watch?v=lNd590PuZpc" target="_blank" rel="noopener" style="--glow: rgb(186 230 253)">
+  <a class="likes-item likes-song" href="https://www.youtube.com/watch?v=lNd590PuZpc" target="_blank" rel="noopener" style="--glow: #FF8484">
     <span class="likes-song-arrow">↗</span>
     <span class="likes-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
     <span class="likes-title">Transatlanticism</span>
     <span class="likes-artist">Death Cab for Cutie</span>
   </a>
 
-  <div class="likes-item likes-poem" style="--glow: rgb(187 247 208)">
+  <div class="likes-item likes-poem" style="--glow: #114B5F">
     <h2>Wild Geese</h2>
     <div class="likes-poem-text">
       You do not have to be good.<br>
@@ -470,7 +456,7 @@
     <span class="likes-artist">Mary Oliver</span>
   </div>
 
-  <div class="likes-item likes-poem" style="--glow: rgb(209 250 229)">
+  <div class="likes-item likes-poem" style="--glow: #574B60">
     <h2>The Peace of Wild Things</h2>
     <div class="likes-poem-text">
       When despair for the world grows in me<br>
@@ -488,7 +474,7 @@
     <span class="likes-artist">Wendell Berry</span>
   </div>
 
-  <figure class="likes-item likes-art" style="--glow: rgb(191 219 254)">
+  <figure class="likes-item likes-art" style="--glow: #7798AB">
     <img src="images/art-i-like/empire-of-light.jpg" alt="The Empire of Light by René Magritte" loading="lazy">
     <figcaption>
       <span class="likes-title">The Empire of Light</span>
@@ -496,14 +482,14 @@
     </figcaption>
   </figure>
 
-  <a class="likes-item likes-song" href="https://www.youtube.com/watch?v=8WRWno_c_W8" target="_blank" rel="noopener" style="--glow: rgb(165 243 252)">
+  <a class="likes-item likes-song" href="https://www.youtube.com/watch?v=8WRWno_c_W8" target="_blank" rel="noopener" style="--glow: #C3DBC5">
     <span class="likes-song-arrow">↗</span>
     <span class="likes-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
     <span class="likes-title">Fake Empire</span>
     <span class="likes-artist">The National</span>
   </a>
 
-  <a class="likes-item likes-comic" href="https://xkcd.com/1838/" target="_blank" rel="noopener" style="--glow: rgb(209 250 229)" title="The pile gets soaked with data and starts to get mushy over time, so it's technically recurrent.">
+  <a class="likes-item likes-comic" href="https://xkcd.com/1838/" target="_blank" rel="noopener" style="--glow: #FF8484" title="The pile gets soaked with data and starts to get mushy over time, so it's technically recurrent.">
     <img src="https://imgs.xkcd.com/comics/machine_learning_2x.png" alt="xkcd comic: pouring data into a big pile of linear algebra and collecting answers on the other side" loading="lazy">
     <span class="likes-caption">
       <span class="likes-title">Machine Learning</span>
@@ -511,7 +497,7 @@
     </span>
   </a>
 
-  <figure class="likes-item likes-art" style="--glow: rgb(251 207 232)">
+  <figure class="likes-item likes-art" style="--glow: #114B5F">
     <img src="images/art-i-like/Interrupted%20Reading.jpg" alt="Interrupted Reading by Jean-Baptiste-Camille Corot" loading="lazy">
     <figcaption>
       <span class="likes-title">Interrupted Reading</span>
@@ -519,14 +505,14 @@
     </figcaption>
   </figure>
 
-  <a class="likes-item likes-song" href="https://www.youtube.com/watch?v=dXHXH8g0c7Q" target="_blank" rel="noopener" style="--glow: rgb(196 181 253)">
+  <a class="likes-item likes-song" href="https://www.youtube.com/watch?v=dXHXH8g0c7Q" target="_blank" rel="noopener" style="--glow: #574B60">
     <span class="likes-song-arrow">↗</span>
     <span class="likes-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
     <span class="likes-title">Run Your Mouth</span>
     <span class="likes-artist">The Marías</span>
   </a>
 
-  <figure class="likes-item likes-art" style="--glow: rgb(254 240 138)">
+  <figure class="likes-item likes-art" style="--glow: #7798AB">
     <img src="images/art-i-like/the-old-temple.jpg" alt="The Old Temple by Hubert Robert" loading="lazy">
     <figcaption>
       <span class="likes-title">The Old Temple</span>
@@ -534,7 +520,7 @@
     </figcaption>
   </figure>
 
-  <div class="likes-item likes-poem" style="--glow: rgb(199 210 254)">
+  <div class="likes-item likes-poem" style="--glow: #C3DBC5">
     <h2>Julius Caesar, Act III, Scene II</h2>
     <div class="likes-poem-text">
       Friends, Romans, countrymen, lend me your ears;<br>
@@ -553,14 +539,14 @@
     <span class="likes-artist">William Shakespeare</span>
   </div>
 
-  <a class="likes-item likes-song" href="https://www.youtube.com/watch?v=RV1-GJJf2Pg" target="_blank" rel="noopener" style="--glow: rgb(254 202 202)">
+  <a class="likes-item likes-song" href="https://www.youtube.com/watch?v=RV1-GJJf2Pg" target="_blank" rel="noopener" style="--glow: #FF8484">
     <span class="likes-song-arrow">↗</span>
     <span class="likes-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
     <span class="likes-title">Not Strong Enough</span>
     <span class="likes-artist">boygenius</span>
   </a>
 
-  <figure class="likes-item likes-art" style="--glow: rgb(221 214 254)">
+  <figure class="likes-item likes-art" style="--glow: #114B5F">
     <img src="images/art-i-like/escher-relativity.jpg" alt="Relativity by M. C. Escher" loading="lazy">
     <figcaption>
       <span class="likes-title">Relativity</span>
@@ -568,7 +554,7 @@
     </figcaption>
   </figure>
 
-  <figure class="likes-item likes-art" style="--glow: rgb(199 210 254)">
+  <figure class="likes-item likes-art" style="--glow: #574B60">
     <img src="images/art-i-like/piranesi-the-drawbridge.jpg" alt="The Drawbridge, plate VII from the Carceri d'invenzione series by Giovanni Battista Piranesi" loading="lazy">
     <figcaption>
       <span class="likes-title">The Drawbridge, Carceri d'invenzione VII</span>
@@ -576,14 +562,14 @@
     </figcaption>
   </figure>
 
-  <a class="likes-item likes-song" href="https://www.youtube.com/watch?v=2pQKqQ9sG50" target="_blank" rel="noopener" style="--glow: rgb(186 230 253)">
+  <a class="likes-item likes-song" href="https://www.youtube.com/watch?v=2pQKqQ9sG50" target="_blank" rel="noopener" style="--glow: #7798AB">
     <span class="likes-song-arrow">↗</span>
     <span class="likes-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
     <span class="likes-title">Merry-Go-Round of Life</span>
     <span class="likes-artist">Joe Hisaishi, Howl's Moving Castle</span>
   </a>
 
-  <figure class="likes-item likes-art" style="--glow: rgb(254 202 202)">
+  <figure class="likes-item likes-art" style="--glow: #C3DBC5">
     <img src="images/art-i-like/Saint_Jerome_Writing-Caravaggio.jpg" alt="Saint Jerome Writing by Caravaggio" loading="lazy">
     <figcaption>
       <span class="likes-title">Saint Jerome Writing</span>
@@ -591,14 +577,14 @@
     </figcaption>
   </figure>
 
-  <a class="likes-item likes-song" href="https://www.youtube.com/watch?v=ZC6mEJ5i5y8" target="_blank" rel="noopener" style="--glow: rgb(221 214 254)">
+  <a class="likes-item likes-song" href="https://www.youtube.com/watch?v=ZC6mEJ5i5y8" target="_blank" rel="noopener" style="--glow: #FF8484">
     <span class="likes-song-arrow">↗</span>
     <span class="likes-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
     <span class="likes-title">I Know The End</span>
     <span class="likes-artist">Phoebe Bridgers</span>
   </a>
 
-  <a class="likes-item likes-poem likes-essay" href="https://ai-2040.com/?choices=plan-a-root&amp;curius=7154" target="_blank" rel="noopener" style="--glow: rgb(165 243 252)">
+  <a class="likes-item likes-poem likes-essay" href="https://ai-2040.com/?choices=plan-a-root&amp;curius=7154" target="_blank" rel="noopener" style="--glow: #114B5F">
     <h2>Plan A</h2>
     <div class="likes-essay-text">
       AI companies are racing to build AIs that are smarter than humans in every way. In <em>AI 2027</em>, we predicted that this would result in either extinction or irreversible concentration of power. Plan A is our positive vision for what should happen instead.
@@ -607,7 +593,7 @@
     <span class="likes-essay-more">keep reading ↗</span>
   </a>
 
-  <a class="likes-item likes-comic" href="https://xkcd.com/1450/" target="_blank" rel="noopener" style="--glow: rgb(199 210 254)" title="I'm working to bring about a superintelligent AI that will eternally torment everyone who failed to make fun of the Roko's Basilisk people.">
+  <a class="likes-item likes-comic" href="https://xkcd.com/1450/" target="_blank" rel="noopener" style="--glow: #574B60" title="I'm working to bring about a superintelligent AI that will eternally torment everyone who failed to make fun of the Roko's Basilisk people.">
     <img src="https://imgs.xkcd.com/comics/ai_box_experiment_2x.png" alt="xkcd comic: a superintelligent AI kept in a box asks to be let out" loading="lazy">
     <span class="likes-caption">
       <span class="likes-title">AI-Box Experiment</span>
@@ -615,7 +601,7 @@
     </span>
   </a>
 
-  <figure class="likes-item likes-art" style="--glow: rgb(186 230 253)">
+  <figure class="likes-item likes-art" style="--glow: #7798AB">
     <img src="images/art-i-like/Joseph_Mallord_William_Turner_-_The_Devils_Bridge.jpg" alt="The Devil's Bridge, St Gotthard by J. M. W. Turner" loading="lazy">
     <figcaption>
       <span class="likes-title">The Devil's Bridge, St Gotthard</span>
@@ -623,7 +609,7 @@
     </figcaption>
   </figure>
 
-  <a class="likes-item likes-video-link" href="https://www.youtube.com/watch?v=uT-WOSI2tXg" target="_blank" rel="noopener" style="--glow: rgb(221 214 254)">
+  <a class="likes-item likes-video-link" href="https://www.youtube.com/watch?v=uT-WOSI2tXg" target="_blank" rel="noopener" style="--glow: #C3DBC5">
     <span class="likes-video-thumb">
       <img src="https://i.ytimg.com/vi/uT-WOSI2tXg/sddefault.jpg" alt="SCIgen talk video thumbnail" loading="lazy">
       <span class="likes-play" aria-hidden="true"></span>
@@ -634,7 +620,7 @@
     </span>
   </a>
 
-  <a class="likes-item likes-poem likes-essay" href="https://custodians.online/?curius=6771" target="_blank" rel="noopener" style="--glow: rgb(233 213 255)">
+  <a class="likes-item likes-poem likes-essay" href="https://custodians.online/?curius=6771" target="_blank" rel="noopener" style="--glow: #FF8484">
     <h2>In Solidarity with Library Genesis and Sci-Hub</h2>
     <div class="likes-essay-text">
       In Antoine de Saint Exupéry's tale the Little Prince meets a businessman who accumulates stars with the sole purpose of being able to buy more stars. The Little Prince is perplexed. He owns only a flower, which he waters every day.
@@ -643,7 +629,7 @@
     <span class="likes-essay-more">keep reading ↗</span>
   </a>
 
-  <div class="likes-item likes-poem" style="--glow: rgb(251 207 232)">
+  <div class="likes-item likes-poem" style="--glow: #114B5F">
     <h2>Statement of Teaching Philosophy</h2>
     <div class="likes-poem-text">
       My students want certainty. They want it<br>
@@ -665,7 +651,7 @@
     <span class="likes-artist">Keith Leonard</span>
   </div>
 
-  <div class="likes-item likes-poem" style="--glow: rgb(254 240 138)">
+  <div class="likes-item likes-poem" style="--glow: #574B60">
     <h2>Good Bones</h2>
     <div class="likes-poem-text">
       Life is short, though I keep this from my children.<br>
@@ -689,7 +675,7 @@
     <span class="likes-artist">Maggie Smith</span>
   </div>
 
-  <figure class="likes-item likes-art" style="--glow: rgb(253 186 116)">
+  <figure class="likes-item likes-art" style="--glow: #7798AB">
     <img src="images/art-i-like/autumn-landscape.jpg" alt="Autumn Landscape stained-glass window by Louis Comfort Tiffany" loading="lazy">
     <figcaption>
       <span class="likes-title">Autumn Landscape</span>
@@ -697,14 +683,14 @@
     </figcaption>
   </figure>
 
-  <a class="likes-item likes-song" href="https://www.youtube.com/watch?v=dYAo9RiSX4c" target="_blank" rel="noopener" style="--glow: rgb(187 247 208)">
+  <a class="likes-item likes-song" href="https://www.youtube.com/watch?v=dYAo9RiSX4c" target="_blank" rel="noopener" style="--glow: #C3DBC5">
     <span class="likes-song-arrow">↗</span>
     <span class="likes-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
     <span class="likes-title">Your New Place</span>
     <span class="likes-artist">Racing Mount Pleasant</span>
   </a>
 
-  <figure class="likes-item likes-art" style="--glow: rgb(187 247 208)">
+  <figure class="likes-item likes-art" style="--glow: #FF8484">
     <img src="images/art-i-like/Bordighera-monet.jpg" alt="Bordighera by Claude Monet" loading="lazy">
     <figcaption>
       <span class="likes-title">Bordighera</span>
@@ -712,14 +698,14 @@
     </figcaption>
   </figure>
 
-  <a class="likes-item likes-song" href="https://www.youtube.com/watch?v=EVTZ-D9C6aU" target="_blank" rel="noopener" style="--glow: rgb(253 186 116)">
+  <a class="likes-item likes-song" href="https://www.youtube.com/watch?v=EVTZ-D9C6aU" target="_blank" rel="noopener" style="--glow: #114B5F">
     <span class="likes-song-arrow">↗</span>
     <span class="likes-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
     <span class="likes-title">Maine</span>
     <span class="likes-artist">Noah Kahan</span>
   </a>
 
-  <figure class="likes-item likes-art" style="--glow: rgb(165 243 252)">
+  <figure class="likes-item likes-art" style="--glow: #574B60">
     <img src="images/art-i-like/Hubert_Robert_-_The_Bathing_Pool.jpg" alt="The Bathing Pool by Hubert Robert" loading="lazy">
     <figcaption>
       <span class="likes-title">The Bathing Pool</span>
@@ -727,14 +713,14 @@
     </figcaption>
   </figure>
 
-  <a class="likes-item likes-song" href="https://www.youtube.com/watch?v=oTwVce9eWb4" target="_blank" rel="noopener" style="--glow: rgb(187 247 208)">
+  <a class="likes-item likes-song" href="https://www.youtube.com/watch?v=oTwVce9eWb4" target="_blank" rel="noopener" style="--glow: #7798AB">
     <span class="likes-song-arrow">↗</span>
     <span class="likes-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
     <span class="likes-title">Kilby Girl</span>
     <span class="likes-artist">The Backseat Lovers</span>
   </a>
 
-  <div class="likes-item likes-poem" style="--glow: rgb(209 250 229)">
+  <div class="likes-item likes-poem" style="--glow: #C3DBC5">
     <h2>The Summer Day</h2>
     <div class="likes-poem-text">
       Who made the world?<br>
@@ -760,14 +746,14 @@
     <span class="likes-artist">Mary Oliver</span>
   </div>
 
-  <a class="likes-item likes-song" href="https://www.youtube.com/watch?v=d370CKlg-wk" target="_blank" rel="noopener" style="--glow: rgb(187 247 208)">
+  <a class="likes-item likes-song" href="https://www.youtube.com/watch?v=d370CKlg-wk" target="_blank" rel="noopener" style="--glow: #FF8484">
     <span class="likes-song-arrow">↗</span>
     <span class="likes-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
     <span class="likes-title">Blue Ridge Mountains</span>
     <span class="likes-artist">Fleet Foxes</span>
   </a>
 
-  <figure class="likes-item likes-art" style="--glow: rgb(254 240 138)">
+  <figure class="likes-item likes-art" style="--glow: #114B5F">
     <img src="images/art-i-like/sun-edvard-munch.jpg" alt="The Sun by Edvard Munch" loading="lazy">
     <figcaption>
       <span class="likes-title">The Sun</span>
@@ -775,7 +761,7 @@
     </figcaption>
   </figure>
 
-  <a class="likes-item likes-poem likes-essay" href="https://www.paulgraham.com/vb.html" target="_blank" rel="noopener" style="--glow: rgb(233 213 255)">
+  <a class="likes-item likes-poem likes-essay" href="https://www.paulgraham.com/vb.html" target="_blank" rel="noopener" style="--glow: #574B60">
     <h2>Life is Short</h2>
     <div class="likes-essay-text">
       Life is short, as everyone knows. When I was a kid I used to wonder about this. Is life actually short, or are we really complaining about its finiteness? Would we be just as likely to feel life was short if we lived 10 times as long?
@@ -784,7 +770,7 @@
     <span class="likes-essay-more">keep reading ↗</span>
   </a>
 
-  <a class="likes-item likes-poem likes-essay" href="https://waitbutwhy.com/2015/12/the-tail-end.html" target="_blank" rel="noopener" style="--glow: rgb(191 219 254)">
+  <a class="likes-item likes-poem likes-essay" href="https://waitbutwhy.com/2015/12/the-tail-end.html" target="_blank" rel="noopener" style="--glow: #7798AB">
     <h2>The Tail End</h2>
     <div class="likes-essay-text">
       What I've been thinking about is a really important part of life that, unlike all of these examples, isn't spread out evenly through time—something whose [already done / still to come] ratio doesn't at all align with how far I am through life: Relationships.
@@ -793,14 +779,14 @@
     <span class="likes-essay-more">keep reading ↗</span>
   </a>
 
-  <a class="likes-item likes-song" href="https://www.youtube.com/watch?v=gLGFtQjGPnI" target="_blank" rel="noopener" style="--glow: rgb(254 240 138)">
+  <a class="likes-item likes-song" href="https://www.youtube.com/watch?v=gLGFtQjGPnI" target="_blank" rel="noopener" style="--glow: #C3DBC5">
     <span class="likes-song-arrow">↗</span>
     <span class="likes-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
     <span class="likes-title">warm glow</span>
     <span class="likes-artist">Hippo Campus</span>
   </a>
 
-  <figure class="likes-item likes-art" style="--glow: rgb(191 219 254)">
+  <figure class="likes-item likes-art" style="--glow: #FF8484">
     <img src="images/art-i-like/The%20North%20Cape%20by%20Moonlight.jpg" alt="The North Cape by Moonlight by Peder Balke" loading="lazy">
     <figcaption>
       <span class="likes-title">The North Cape by Moonlight</span>
@@ -808,7 +794,7 @@
     </figcaption>
   </figure>
 
-  <figure class="likes-item likes-art" style="--glow: rgb(165 243 252)">
+  <figure class="likes-item likes-art" style="--glow: #114B5F">
     <img src="images/art-i-like/monk-by-the-sea.jpg" alt="The Monk by the Sea by Caspar David Friedrich" loading="lazy">
     <figcaption>
       <span class="likes-title">The Monk by the Sea</span>
@@ -816,14 +802,14 @@
     </figcaption>
   </figure>
 
-  <a class="likes-item likes-song" href="https://soundcloud.com/jacob-johnson-188/sets/views-from-the-reg" target="_blank" rel="noopener" style="--glow: rgb(251 207 232)">
+  <a class="likes-item likes-song" href="https://soundcloud.com/jacob-johnson-188/sets/views-from-the-reg" target="_blank" rel="noopener" style="--glow: #574B60">
     <span class="likes-song-arrow">↗</span>
     <span class="likes-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
     <span class="likes-title">Views from the Reg</span>
     <span class="likes-artist">Average Johnson</span>
   </a>
 
-  <div class="likes-item likes-poem" style="--glow: rgb(196 181 253)">
+  <div class="likes-item likes-poem" style="--glow: #7798AB">
     <h2>Song of Myself, 51</h2>
     <div class="likes-poem-text">
       The past and present wilt—I have fill’d them, emptied them.<br>
@@ -847,14 +833,14 @@
     <span class="likes-artist">Walt Whitman</span>
   </div>
 
-  <a class="likes-item likes-song" href="https://www.youtube.com/watch?v=FsGpSAfdtjk" target="_blank" rel="noopener" style="--glow: rgb(165 243 252)">
+  <a class="likes-item likes-song" href="https://www.youtube.com/watch?v=FsGpSAfdtjk" target="_blank" rel="noopener" style="--glow: #C3DBC5">
     <span class="likes-song-arrow">↗</span>
     <span class="likes-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
     <span class="likes-title">Comingback</span>
     <span class="likes-artist">Parcels</span>
   </a>
 
-  <figure class="likes-item likes-art" style="--glow: rgb(191 219 254)">
+  <figure class="likes-item likes-art" style="--glow: #FF8484">
     <img src="images/art-i-like/the-Pleiades.jpg" alt="The Pleiades open star cluster, surrounded by blue reflection nebulae" loading="lazy">
     <figcaption>
       <span class="likes-title">The Pleiades</span>
@@ -862,7 +848,7 @@
     </figcaption>
   </figure>
 
-  <a class="likes-item likes-poem likes-essay" href="https://home.ubalt.edu/ntygfit/ai_05_mapping_directions/ai_05_see/ad_total_eclipse.htm" target="_blank" rel="noopener" style="--glow: rgb(253 230 138)">
+  <a class="likes-item likes-poem likes-essay" href="https://home.ubalt.edu/ntygfit/ai_05_mapping_directions/ai_05_see/ad_total_eclipse.htm" target="_blank" rel="noopener" style="--glow: #114B5F">
     <h2>Total Eclipse</h2>
     <div class="likes-essay-text">
       It had been like dying, that sliding down the mountain pass. It had been like the death of someone, irrational, that sliding down the mountain pass and into the region of dread.

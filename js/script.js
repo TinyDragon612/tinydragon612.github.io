@@ -6,28 +6,38 @@ let rxFontsReady = null;
 const loadRxGrades = () =>
   rxFontsReady = rxFontsReady || Promise.all(rxGrades.map(g => document.fonts.load(`16px '${g}'`)));
 
-// ── About text decipher: step down through the degraded grades ──
-const decipherAbout = (() => {
+// ── Decipher: step an element down through the degraded grades on reveal ──
+function decipherEl(el, setFont, clearFont) {
+  if (rxReduced) return;
   const stepMs = 170;
-  let run = 0;
-  return () => {
-    const text = document.querySelector('.about-text');
-    if (!text || rxReduced) return;
-    const id = ++run;
-    // wait for the grade fonts so every step renders, not the fallback
-    loadRxGrades().then(() => {
-      if (id !== run) return;
-      rxGrades.forEach((g, i) => {
-        setTimeout(() => {
-          if (id === run) text.style.setProperty('--about-font', `'${g}', Georgia, serif`);
-        }, i * stepMs);
-      });
+  const id = (el._rxDecipher = (el._rxDecipher || 0) + 1);
+  // wait for the grade fonts so every step renders, not the fallback
+  loadRxGrades().then(() => {
+    if (id !== el._rxDecipher) return;
+    rxGrades.forEach((g, i) => {
       setTimeout(() => {
-        if (id === run) text.style.removeProperty('--about-font');
-      }, rxGrades.length * stepMs);
+        if (id === el._rxDecipher) setFont(`'${g}', Georgia, serif`);
+      }, i * stepMs);
     });
-  };
-})();
+    setTimeout(() => {
+      if (id === el._rxDecipher) clearFont();
+    }, rxGrades.length * stepMs);
+  });
+}
+
+// the About text deciphers as one block via its shared font variable
+const decipherAbout = () => {
+  const text = document.querySelector('.about-text');
+  if (!text) return;
+  decipherEl(text,
+    v => text.style.setProperty('--about-font', v),
+    () => text.style.removeProperty('--about-font'));
+};
+
+// every hover-pixelated title deciphers when its tab appears
+const decipherHeaders = el =>
+  el.querySelectorAll('h1, .likes-heading').forEach(h =>
+    decipherEl(h, v => { h.style.fontFamily = v; }, () => { h.style.fontFamily = ''; }));
 
 // ── Hover pixelation: words snap to the roughest grade, then re-resolve ──
 // wrap each word in a span so it can carry its own font
@@ -85,6 +95,7 @@ function showTab(name) {
   if (!el) return;
   el.classList.add('active');
   if (name === 'about') decipherAbout();
+  else if (el.innerHTML.trim() !== '' || !el.getAttribute('data-src')) decipherHeaders(el);
 
   // highlight the nav tab for the current section (posts → Blog, projects → Projects)
   const section = name.startsWith('post-') ? 'blog'
@@ -100,6 +111,7 @@ function showTab(name) {
         el.innerHTML = html;
         // page titles get the hover pixelation once the fragment lands
         el.querySelectorAll('h1, .likes-heading').forEach(wrapWords);
+        decipherHeaders(el);
         if (window.Prism) el.querySelectorAll('pre code').forEach(c => Prism.highlightElement(c));
       })
       .catch(err => console.error('Error loading content:', err));
@@ -136,9 +148,9 @@ showTab(location.hash.slice(1) || 'home');
 
   const cols = 9, cellSize = 22, baseRows = 16;
   const colors = [
-    'rgb(186 230 253)', 'rgb(251 207 232)', 'rgb(187 247 208)',
-    'rgb(254 240 138)', 'rgb(254 202 202)', 'rgb(233 213 255)',
-    'rgb(191 219 254)', 'rgb(199 210 254)', 'rgb(221 214 254)'
+    '#7798AB', '#C3DBC5', '#FF8484',
+    '#114B5F', '#574B60', '#7798AB',
+    '#C3DBC5', '#FF8484', '#114B5F'
   ];
 
   // bar heights per column (out of `baseRows`, scaled to the actual row count)
@@ -161,24 +173,38 @@ showTab(location.hash.slice(1) || 'home');
     panel.innerHTML = html;
   }
 
-  // on the first reveal, wipe the fill and cascade it back in: bars grow
-  // bottom-up, columns sweep left to right
+  // on the first reveal, fill the bars arcade-style: discrete chunky ticks
+  // with no easing — every bar rises in lockstep like a retro loading
+  // screen, then locks in with a quick top-cell blink swept left to right
   let entered = false;
   function entrance() {
     if (entered) return;
     entered = true;
     if (rxReduced) return;
-    [...panel.children].forEach((colEl, c) => {
-      [...colEl.children].forEach((cell, r) => {
-        const color = cell.style.backgroundColor;
-        if (!color) return;
-        cell.style.transition = 'background-color 0ms';
-        cell.style.backgroundColor = '';
-        setTimeout(() => {
-          cell.style.transition = 'background-color 450ms ease';
-          cell.style.backgroundColor = color;
-        }, 150 + c * 70 + (colEl.children.length - 1 - r) * 35);
-      });
+    const TICKS = 12, TICK_MS = 80;
+    // per-column filled cells, bottom-up
+    const bars = [...panel.children].map(colEl =>
+      [...colEl.children].filter(cell => cell.style.backgroundColor).reverse());
+    bars.flat().forEach(cell => {
+      cell._final = cell.style.backgroundColor;
+      cell.style.transition = 'background-color 0ms';
+      cell.style.backgroundColor = '';
+    });
+    for (let t = 1; t <= TICKS; t++) {
+      setTimeout(() => {
+        bars.forEach(bar => {
+          bar.slice(0, Math.round(bar.length * t / TICKS)).forEach(cell => {
+            cell.style.backgroundColor = cell._final;
+          });
+        });
+      }, 150 + t * TICK_MS);
+    }
+    bars.forEach((bar, c) => {
+      const top = bar[bar.length - 1];
+      if (!top) return;
+      const at = 150 + (TICKS + 1) * TICK_MS + c * 60;
+      setTimeout(() => { top.style.backgroundColor = ''; }, at);
+      setTimeout(() => { top.style.backgroundColor = top._final; }, at + 90);
     });
   }
 
@@ -239,6 +265,88 @@ showTab(location.hash.slice(1) || 'home');
   });
 })();
 
+// ── Writing page: click anywhere and pixels bloom out of the page itself ──
+(function initBlogDeco() {
+  const tab = document.getElementById('blog');
+  const layer = document.getElementById('blog-deco');
+  if (!tab || !layer) return;
+
+  const colors = ['#7798AB', '#C3DBC5', '#FF8484', '#114B5F', '#574B60'];
+  const cellSize = 22, RADIUS = 5;
+  const TICK = rxReduced ? 0 : 110;
+  let cols = 0, rows = 0, burst = 0;
+
+  function build() {
+    let html = '';
+    for (let c = 0; c < cols; c++) {
+      html += '<div class="bloom-col">';
+      for (let r = 0; r < rows; r++) html += '<div class="bloom-cell"></div>';
+      html += '</div>';
+    }
+    layer.innerHTML = html;
+  }
+
+  // resolve the cell at fire time — the grid may have been rebuilt (resize,
+  // font reflow) between scheduling and painting
+  function cellAt(c, r) {
+    return layer.children[c] && layer.children[c].children[r];
+  }
+  function paint(c, r, color, id, delay) {
+    setTimeout(() => {
+      const cell = cellAt(c, r);
+      if (!cell) return;
+      cell._burst = id;
+      cell.style.backgroundColor = color;
+    }, delay);
+    setTimeout(() => {
+      const cell = cellAt(c, r);
+      // don't wipe cells a newer bloom has repainted
+      if (cell && cell._burst === id) cell.style.backgroundColor = '';
+    }, delay + 420);
+  }
+
+  // pixel bloom: rings spread gently out from the origin in discrete ticks,
+  // one accent color per click, with a trailing edge that clears behind them
+  function bloom(col, row) {
+    const id = ++burst;
+    const color = colors[id % colors.length];
+    for (let d = 0; d <= RADIUS; d++) {
+      for (let dc = -d; dc <= d; dc++) {
+        const dr = d - Math.abs(dc);
+        paint(col + dc, row + dr, color, id, d * TICK);
+        if (dr) paint(col + dc, row - dr, color, id, d * TICK);
+      }
+    }
+  }
+
+  // size the backdrop to the tab; it is display:none at load, so the
+  // observer builds it once the tab first becomes visible
+  let greeted = false;
+  function sync() {
+    const c = Math.ceil(layer.offsetWidth / cellSize);
+    const r = Math.ceil(layer.offsetHeight / cellSize);
+    if (c > 0 && r > 0 && (c !== cols || r !== rows)) {
+      cols = c;
+      rows = r;
+      build();
+      if (!greeted) {
+        greeted = true;
+        // a little hello-bloom the first time the tab opens
+        setTimeout(() => bloom(Math.floor(cols * 0.6), Math.floor(rows / 2)), 400);
+      }
+    }
+  }
+  new ResizeObserver(sync).observe(layer);
+  sync();
+
+  tab.addEventListener('click', e => {
+    if (e.target.closest('a')) return;
+    const rect = layer.getBoundingClientRect();
+    bloom(Math.floor((e.clientX - rect.left) / cellSize),
+          Math.floor((e.clientY - rect.top) / cellSize));
+  });
+})();
+
 // ── Background boxes for home tab ──
 (function initBoxes() {
   const grid = document.getElementById('boxes-grid');
@@ -246,34 +354,53 @@ showTab(location.hash.slice(1) || 'home');
 
   const rows = 150, cols = 100;
   const colors = [
-    'rgb(186 230 253)', 'rgb(251 207 232)', 'rgb(187 247 208)',
-    'rgb(254 240 138)', 'rgb(254 202 202)', 'rgb(233 213 255)',
-    'rgb(191 219 254)', 'rgb(199 210 254)', 'rgb(221 214 254)'
+    '#7798AB', '#C3DBC5', '#FF8484',
+    '#114B5F', '#574B60', '#7798AB',
+    '#C3DBC5', '#FF8484', '#114B5F'
   ];
-  const svgPlus = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="box-plus"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6"/></svg>`;
 
   let html = '';
   for (let i = 0; i < rows; i++) {
     html += '<div class="box-row">';
     for (let j = 0; j < cols; j++) {
-      html += `<div class="box-cell">${(i % 2 === 0 && j % 2 === 0) ? svgPlus : ''}</div>`;
+      html += '<div class="box-cell"></div>';
     }
     html += '</div>';
   }
   grid.innerHTML = html;
 
-  grid.addEventListener('mouseover', e => {
-    const cell = e.target.closest('.box-cell');
-    if (cell) {
+  // light a cell instantly, then let it fade once the cursor has moved on;
+  // re-touching a lit cell extends its life without strobing a new color
+  function light(cell) {
+    if (!cell.style.backgroundColor) {
       cell.style.transition = 'background-color 0ms';
       cell.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
     }
-  });
-  grid.addEventListener('mouseout', e => {
-    const cell = e.target.closest('.box-cell');
-    if (cell) {
+    clearTimeout(cell._fade);
+    cell._fade = setTimeout(() => {
       cell.style.transition = 'background-color 600ms ease';
       cell.style.backgroundColor = '';
+    }, 150);
+  }
+
+  // sample along the pointer's path so fast flicks light every cell they
+  // cross, not just the few positions the browser happens to report
+  let last = null;
+  grid.addEventListener('mousemove', e => {
+    const pts = [[e.clientX, e.clientY]];
+    if (last) {
+      const dx = e.clientX - last.x, dy = e.clientY - last.y;
+      const steps = Math.min(60, Math.floor(Math.hypot(dx, dy) / 10));
+      for (let i = 1; i < steps; i++) {
+        pts.push([last.x + dx * i / steps, last.y + dy * i / steps]);
+      }
     }
+    last = { x: e.clientX, y: e.clientY };
+    pts.forEach(([x, y]) => {
+      const el = document.elementFromPoint(x, y);
+      const cell = el && el.closest('.box-cell');
+      if (cell) light(cell);
+    });
   });
+  grid.addEventListener('mouseleave', () => { last = null; });
 })();

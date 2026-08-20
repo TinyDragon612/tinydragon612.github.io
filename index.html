@@ -27,11 +27,11 @@
 </head>
 <body>
   <nav>
-    <a href="#home" style="--glow: rgb(186 230 253)">Home</a>
-    <a href="#about" style="--glow: rgb(251 207 232)">About Me</a>
-    <a href="#blog" style="--glow: rgb(233 213 255)">Writing</a>
-    <a href="#projects" style="--glow: rgb(187 247 208)">Projects</a>
-    <a href="#things-i-like" style="--glow: rgb(254 240 138)">Things I Like</a>
+    <a href="#home" style="--glow: #7798AB">Home</a>
+    <a href="#about" style="--glow: #C3DBC5">About Me</a>
+    <a href="#blog" style="--glow: #FF8484">Writing</a>
+    <a href="#projects" style="--glow: #114B5F">Projects</a>
+    <a href="#things-i-like" style="--glow: #574B60">Things I Like</a>
     <button id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
       <svg class="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z"/></svg>
       <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"/></svg>
@@ -66,48 +66,16 @@
   </div>
 
   <div id="blog" class="tab">
+    <div id="blog-deco" aria-hidden="true"></div>
     <h1>Writing</h1>
-    <div class="card-grid">
-      <a href="#post-rapid-upskilling" class="card" style="--glow: rgb(254 240 138)">
-        <span class="card-plus">+</span>
-        <h2>Rapid Upskilling</h2>
-        <div class="card-date"><time datetime="2026-07-15">July 15th, 2026</time></div>
-        <p>How to maximize your plasticity.</p>
-        <span class="card-tag">AI safety</span>
-        <span class="card-tag">essay</span>
-      </a>
-      <a href="#post-model-organisms" class="card" style="--glow: rgb(209 250 229)">
-        <span class="card-plus">+</span>
-        <h2>Model Organisms and the Capabilities Curve</h2>
-        <div class="card-date"><time datetime="2026-05-14">May 14th, 2026</time></div>
-        <p>Quick takes on what small-scale models can (and can't) tell us about frontier behavior.</p>
-        <span class="card-tag">AI safety</span>
-        <span class="card-tag">essay</span>
-      </a>
-      <a href="#post-safety-opportunities" class="card" style="--glow: rgb(165 243 252)">
-        <span class="card-plus">+</span>
-        <h2>Fragile Opportunities for Safety</h2>
-        <div class="card-date"><time datetime="2026-05-10">May 10th, 2026</time></div>
-        <p>Windows of opportunity for AI safety work that may close as capabilities scale.</p>
-        <span class="card-tag">AI safety</span>
-        <span class="card-tag">essay</span>
-      </a>
-      <a href="#post-welcome-to-blog" class="card" style="--glow: rgb(253 186 116)">
-        <span class="card-plus">+</span>
-        <h2>What I Write For</h2>
-        <div class="card-date"><time datetime="2026-04-23">April 23rd, 2026</time></div>
-        <p>Misc thoughts about writing.</p>
-        <span class="card-tag">essay</span>
-      </a>
-      <a href="#post-platos-dilemma" class="card" style="--glow: rgb(196 181 253)">
-        <span class="card-plus">+</span>
-        <h2>Plato's Dilemma of Fiction</h2>
-        <div class="card-date"><time datetime="2025-12-11">December 11th, 2025</time></div>
-        <p>An essay about Plato's use of fiction in the Republic.</p>
-        <span class="card-tag">philosophy</span>
-        <span class="card-tag">essay</span>
-      </a>
-    </div>
+    <ul class="post-list">
+      <li><a href="#post-rapid-upskilling"><span class="post-title">Rapid Upskilling</span><time datetime="2026-07-15">July 15th, 2026</time></a></li>
+      <li><a href="#post-model-organisms"><span class="post-title">Model Organisms and the Capabilities Curve</span><time datetime="2026-05-14">May 14th, 2026</time></a></li>
+      <li><a href="#post-safety-opportunities"><span class="post-title">Fragile Opportunities for Safety</span><time datetime="2026-05-10">May 10th, 2026</time></a></li>
+      <li><a href="#post-welcome-to-blog"><span class="post-title">What I Write For</span><time datetime="2026-04-23">April 23rd, 2026</time></a></li>
+      <li><a href="#post-platos-dilemma"><span class="post-title">Plato's Dilemma of Fiction</span><time datetime="2025-12-11">December 11th, 2025</time></a></li>
+    </ul>
+    <span class="blog-deco-hint">(click anywhere)</span>
   </div>
 
   <div id="post-interests" class="tab" data-src="blogs/interests.html"></div>
@@ -125,46 +93,39 @@
   <div id="projects" class="tab">
     <h1>Projects</h1>
     <div class="card-grid">
-      <a href="#project-covert-collude" class="card" style="--glow: rgb(253 230 138)">
-        <span class="card-plus">+</span>
+      <a href="#project-covert-collude" class="card" style="--glow: #7798AB">
         <h2>Covert Collude</h2>
         <p>A control setting for steganographic multi-agent collusion. Built for the 2026 Apart Research Control Hackathon.</p>
         <span class="card-tag">AI safety</span>
         <span class="card-tag">research</span>
       </a>
-      <a href="#project-astro" class="card" style="--glow: rgb(186 230 253)">
-        <span class="card-plus">+</span>
+      <a href="#project-astro" class="card" style="--glow: #C3DBC5">
         <h2>AstroPhoenix</h2>
         <p>Built for the 2025 NASA Space Apps Challenge. An AI-powered research exploration platform.</p>
         <span class="card-tag">web</span>
         <span class="card-tag">ML</span>
       </a>
-      <a href="#project-art" class="card" style="--glow: rgb(251 207 232)">
-        <span class="card-plus">+</span>
+      <a href="#project-art" class="card" style="--glow: #FF8484">
         <h2>Drawings 2025</h2>
         <p>A couple of pieces I've made.</p>
         <span class="card-tag">art</span>
       </a>
-      <a href="#project-language" class="card" style="--glow: rgb(221 214 254)">
-        <span class="card-plus">+</span>
+      <a href="#project-language" class="card" style="--glow: #114B5F">
         <h2>Language Classification</h2>
         <p>Recurrent neural network for identifying the language of a given text sample.</p>
         <span class="card-tag">ML</span>
       </a>
-      <a href="#project-handwriting" class="card" style="--glow: rgb(199 210 254)">
-        <span class="card-plus">+</span>
+      <a href="#project-handwriting" class="card" style="--glow: #574B60">
         <h2>Handwriting Classification</h2>
         <p>Convolutional neural network classifying handwritten digits from the MNIST dataset.</p>
         <span class="card-tag">ML</span>
       </a>
-      <a href="#project-finance" class="card" style="--glow: rgb(167 243 208)">
-        <span class="card-plus">+</span>
+      <a href="#project-finance" class="card" style="--glow: #7798AB">
         <h2>Financial Management Platform</h2>
         <p>A platform for tracking, budgeting, and visualizing personal finances.</p>
         <span class="card-tag">web</span>
       </a>
-      <a href="#project-trie" class="card" style="--glow: rgb(254 202 202)">
-        <span class="card-plus">+</span>
+      <a href="#project-trie" class="card" style="--glow: #C3DBC5">
         <h2>TrieSpeller</h2>
         <p>A trie-based spell-checker with prefix completion and word suggestions.</p>
         <span class="card-tag">CS</span>
