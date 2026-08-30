@@ -89,6 +89,17 @@ function wrapWords(el) {
   });
 })();
 
+// Fisher–Yates over an element's children, so the "cool people" links
+// land in a fresh random order on every page load
+function shuffleChildren(el) {
+  const kids = [...el.children];
+  for (let i = kids.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [kids[i], kids[j]] = [kids[j], kids[i]];
+  }
+  kids.forEach(k => el.appendChild(k));
+}
+
 function showTab(name) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   const el = document.getElementById(name);
@@ -109,6 +120,7 @@ function showTab(name) {
       .then(r => r.text())
       .then(html => {
         el.innerHTML = html;
+        el.querySelectorAll('.likes-people-list').forEach(shuffleChildren);
         // page titles get the hover pixelation once the fragment lands
         el.querySelectorAll('h1, .likes-heading').forEach(wrapWords);
         decipherHeaders(el);
